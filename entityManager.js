@@ -27,7 +27,7 @@ var entityManager = {
 
 // "PRIVATE" DATA
 
-_rocks   : [],
+_ghosts  : [],
 _bullets : [],
 _ships   : [],
 _snake   : [],
@@ -35,12 +35,12 @@ _bShowRocks : true,
 
 // "PRIVATE" METHODS
 
-_generateRocks : function() {
+_generateGhosts : function() {
     var i,
-        NUM_ROCKS = 4;
+        ghostCount = 4;
 
-    for (i = 0; i < NUM_ROCKS; ++i) {
-        // this.generateRock();
+    for (i = 0; i < ghostCount; ++i) {
+        this.generateGhost({color:i});
     }
 },
 
@@ -87,15 +87,19 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._rocks, this._bullets, this._ships, this._snake];
+    this._categories = [this._bullets, this._ships, this._snake, this._ghosts];
 },
 
 init: function() {
-    this._generateRocks();
+    this._generateGhosts();
     //this._generateShip();
 },
 generateSnake : function(descr) {
     this._snake.push(new Snake(descr));
+},
+
+generateGhost : function(descr) {
+    this._ghosts.push(new Ghost(descr));
 },
 /*
 fireBullet: function(cx, cy, velX, velY, rotation) {
@@ -144,8 +148,6 @@ toggleRocks: function() {
 },*/
 
 update: function(du) {
-    console.log(this._snake);
-
     for (var c = 0; c < this._categories.length; ++c) {
 
         var aCategory = this._categories[c];
@@ -166,14 +168,13 @@ update: function(du) {
         }
     }
     
-    if (this._rocks.length === 0) this._generateRocks();
+    // if (this._rocks.length === 0) this._generateRocks();
 
 },
 
 render: function(ctx) {
 
     var debugX = 10, debugY = 100;
-    console.log("entities rendering");
     for (var c = 0; c < this._categories.length; ++c) {
 
         var aCategory = this._categories[c];

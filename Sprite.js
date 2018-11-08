@@ -22,7 +22,7 @@ function Sprite(images) {
     this.frameCount = images.length;
     this.scale = 1;
     this.frame = 0;
-    this.speed = 0.02;
+    this.speed = 0.03;
     this.speedCounter = 0; 
 }
 
@@ -33,8 +33,6 @@ Sprite.prototype.getFrame = function () {
     }
 
     var img = this.images[this.frame];
-
-    console.log(this.speedCounter);
 
     this.speedCounter += this.speed;
     

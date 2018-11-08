@@ -30,6 +30,14 @@ Snake.prototype.cy = 200;
 Snake.prototype.velX = 1;
 Snake.prototype.velY = 0;
 
+
+
+Ship.prototype.KEY_UP = 'W'.charCodeAt(0);
+Ship.prototype.KEY_DOWN  = 'S'.charCodeAt(0);
+Ship.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
+Ship.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
+
+
 Snake.prototype.update = function (du) {
 
     spatialManager.unregister(this);
@@ -37,6 +45,13 @@ Snake.prototype.update = function (du) {
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
+    if (keys[this.KEY_UP] /*&& this.velY <= 0*/){
+        console.log("up pressed");
+        this.velX = 0;
+        this.velY = 1; 
+    }
+
+    this.calculateDirection();
    
     this.cx += this.velX * du;
     this.cy += this.velY * du;
@@ -54,9 +69,29 @@ Snake.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
         
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
     spatialManager.register(this);
+};
 
+Snake.prototype.calculateDirection = function () {
+    //console.log("direction");
+
+    if (keys[this.KEY_UP] /*&& this.velY <= 0*/){
+        console.log("up pressed");
+        this.velX = 0;
+        this.velY = 1; 
+    }
+    if (keys[this.KEY_DOWN] && this.velY >= 0){
+        this.velX = 0;
+        this.velY = -1; 
+    }  
+    if (keys[this.KEY_LEFT] && this.velX <= 0){
+        this.velX = 1;
+        this.velY = 0; 
+    }  
+    if (keys[this.KEY_RIGHT] && this.velX >= 0){
+        this.velX = -1;
+        this.velY = 0; 
+    } 
 };
 
 Snake.prototype.getRadius = function () {
