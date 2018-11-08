@@ -30,7 +30,7 @@ var entityManager = {
 _rocks   : [],
 _bullets : [],
 _ships   : [],
-
+_snake   : [],
 _bShowRocks : true,
 
 // "PRIVATE" METHODS
@@ -40,7 +40,7 @@ _generateRocks : function() {
         NUM_ROCKS = 4;
 
     for (i = 0; i < NUM_ROCKS; ++i) {
-        this.generateRock();
+        // this.generateRock();
     }
 },
 
@@ -87,12 +87,15 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._rocks, this._bullets, this._ships];
+    this._categories = [this._rocks, this._bullets, this._ships, this._snake];
 },
 
 init: function() {
     this._generateRocks();
     //this._generateShip();
+},
+generateSnake : function(descr) {
+    this._snake.push(new Snake(descr));
 },
 /*
 fireBullet: function(cx, cy, velX, velY, rotation) {
@@ -141,6 +144,7 @@ toggleRocks: function() {
 },*/
 
 update: function(du) {
+    console.log(this._snake);
 
     for (var c = 0; c < this._categories.length; ++c) {
 
@@ -169,7 +173,7 @@ update: function(du) {
 render: function(ctx) {
 
     var debugX = 10, debugY = 100;
-
+    console.log("entities rendering");
     for (var c = 0; c < this._categories.length; ++c) {
 
         var aCategory = this._categories[c];

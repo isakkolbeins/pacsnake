@@ -73,6 +73,7 @@ function updateSimulation(du) {
 // GAME-SPECIFIC DIAGNOSTICS
 
 var g_renderSpatialDebug = false;
+var KEY_SPATIAL = keyCode('X');
 var g_isPaused = false;
 var KEY_PAUSE   = keyCode('P');;
 
@@ -82,7 +83,6 @@ var g_useAveVel = true;
 
 var KEY_GRAVITY = keyCode('G');
 var KEY_AVE_VEL = keyCode('V');
-var KEY_SPATIAL = keyCode('X');
 
 var KEY_HALT  = keyCode('H');
 var KEY_RESET = keyCode('R');
