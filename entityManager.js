@@ -30,6 +30,7 @@ var entityManager = {
 _ghosts  : [],
 _bullets : [],
 // _ships   : [],
+_tail    : [],
 _snake   : [],
 _bShowRocks : true,
 
@@ -89,20 +90,40 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets,/* this._ships,*/ this._snake, this._ghosts];
+    this._categories = [this._bullets, this._tail, this._snake, this._ghosts];
 },
 
 init: function() {
     this._generateGhosts();
     //this._generateShip();
 },
+
 generateSnake : function(descr) {
     this._snake.push(new Snake(descr));
+    this.generateTail(this._snake[0]);
+    for (let i = 0; i < descr.length; i++) {
+        this.generateTail(this._tail[i]);
+    }
+},
+
+generateTail : function(follow) {
+    var delay = this._tail.length;
+    var delayMax = 20; // this._tail.length;
+
+    var descr = {   follow : follow,
+        cx : follow.cx,
+        cy : follow.cy,
+        direction : follow.direction,
+        delay : delay,
+        delayMax : delayMax};
+
+    this._tail.push(new Tail(descr));
 },
 
 generateGhost : function(descr) {
     this._ghosts.push(new Ghost(descr));
 },
+
 /*
 fireBullet: function(cx, cy, velX, velY, rotation) {
     this._bullets.push(new Bullet({

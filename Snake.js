@@ -28,6 +28,7 @@ Snake.prototype.cy = 200;
 Snake.prototype.speed = 2;
 Snake.prototype.velX = 2;
 Snake.prototype.velY = 0;
+Snake.prototype.length = 3;
 Snake.prototype.direction = 'R';
 Snake.prototype.isBlue = false;
 

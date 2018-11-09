@@ -33,7 +33,9 @@ function createBeginningSnake() {
 
     entityManager.generateSnake({
         cx : 200,
-        cy : 200
+        cy : 200,
+        length : 40,
+        direction : 'R',
     });
     
 }
@@ -153,8 +155,8 @@ function requestPreloads() {
         ghostOrange     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostOrange.png",
         ghostEdible     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostEdible.png",
 
-        snakeBoddy      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
-        snakeBoddyBlue  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
+        snakeBoddy      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddy.png",
+        snakeBoddyBlue  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddyBlue.png",
         
         snakeHead0L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead0.png",
         snakeHead1L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead1.png",
