@@ -121,11 +121,13 @@ Ghost.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
+    this.wrapPosition();
+
 };
 
 
 Ghost.prototype.getRadius = function () {
-    return (this.sprite.width / 2) * 0.9;
+    return this.sprite.width;
 };
 
 Ghost.prototype.reset = function () {

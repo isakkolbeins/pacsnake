@@ -156,15 +156,25 @@ function requestPreloads() {
         snakeBoddy      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
         snakeBoddyBlue  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
         
-        snakeHead0      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead0.png",
-        snakeHead1      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead1.png",
-        snakeHead2      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead2.png",
-        snakeHead3      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead3.png",
+        snakeHead0L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead0.png",
+        snakeHead1L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead1.png",
+        snakeHead2L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead2.png",
+        snakeHead3L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead3.png",
 
-        snakeHeadBlue0  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue0.png",
-        snakeHeadBlue1  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue1.png",
-        snakeHeadBlue2  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue2.png",
-        snakeHeadBlue3  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue3.png"
+        snakeHead0R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR0.png",
+        snakeHead1R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR1.png",
+        snakeHead2R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR2.png",
+        snakeHead3R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR3.png",
+
+        snakeHeadBlue0L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue0.png",
+        snakeHeadBlue1L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue1.png",
+        snakeHeadBlue2L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue2.png",
+        snakeHeadBlue3L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue3.png",
+
+        snakeHeadBlue0R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR0.png",
+        snakeHeadBlue1R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR1.png",
+        snakeHeadBlue2R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR2.png",
+        snakeHeadBlue3R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR3.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -183,15 +193,25 @@ function preloadDone() {
     g_sprites.snakeBoddy    = new Sprite([g_images.snakeBoddy]);
     g_sprites.snakeBoddyBlue= new Sprite([g_images.snakeBoddyBlue]);
 
-    g_sprites.snakeHead     = new Sprite([  g_images.snakeHead0,
-                                            g_images.snakeHead1,
-                                            g_images.snakeHead2,
-                                            g_images.snakeHead3]);
+    g_sprites.snakeHeadL     = new Sprite([ g_images.snakeHead0L,
+                                            g_images.snakeHead1L,
+                                            g_images.snakeHead2L,
+                                            g_images.snakeHead3L]);
 
-    g_sprites.snakeHeadBlue = new Sprite([  g_images.snakeHeadBlue0,
-                                            g_images.snakeHeadBlue1,
-                                            g_images.snakeHeadBlue2,
-                                            g_images.snakeHeadBlue3]);
+    g_sprites.snakeHeadR     = new Sprite([ g_images.snakeHead0R,
+                                            g_images.snakeHead1R,
+                                            g_images.snakeHead2R,
+                                            g_images.snakeHead3R]);
+
+    g_sprites.snakeHeadBlueL = new Sprite([ g_images.snakeHeadBlue0L,
+                                            g_images.snakeHeadBlue1L,
+                                            g_images.snakeHeadBlue2L,
+                                            g_images.snakeHeadBlue3L]);
+
+    g_sprites.snakeHeadBlueR = new Sprite([  g_images.snakeHeadBlue0R,
+                                            g_images.snakeHeadBlue1R,
+                                            g_images.snakeHeadBlue2R,
+                                            g_images.snakeHeadBlue3R]);
    
     entityManager.init();
     createBeginningSnake();

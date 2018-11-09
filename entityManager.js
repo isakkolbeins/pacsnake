@@ -29,7 +29,7 @@ var entityManager = {
 
 _ghosts  : [],
 _bullets : [],
-_ships   : [],
+// _ships   : [],
 _snake   : [],
 _bShowRocks : true,
 
@@ -41,9 +41,11 @@ _generateGhosts : function() {
 
     for (i = 0; i < ghostCount; ++i) {
         this.generateGhost({color:i});
+        
     }
 },
 
+/*
 _findNearestShip : function(posX, posY) {
     var closestShip = null,
         closestIndex = -1,
@@ -68,7 +70,7 @@ _findNearestShip : function(posX, posY) {
         theShip : closestShip,
         theIndex: closestIndex
     };
-},
+},*/
 
 _forEachOf: function(aCategory, fn) {
     for (var i = 0; i < aCategory.length; ++i) {
@@ -87,7 +89,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._ships, this._snake, this._ghosts];
+    this._categories = [this._bullets,/* this._ships,*/ this._snake, this._ghosts];
 },
 
 init: function() {
@@ -178,10 +180,11 @@ render: function(ctx) {
     for (var c = 0; c < this._categories.length; ++c) {
 
         var aCategory = this._categories[c];
-
+        
+/*
         if (!this._bShowRocks && 
             aCategory == this._rocks)
-            continue;
+            continue;*/
 
         for (var i = 0; i < aCategory.length; ++i) {
 

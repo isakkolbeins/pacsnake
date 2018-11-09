@@ -17,8 +17,6 @@ function Snake(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
-
-
 }
 
 Snake.prototype = new Entity();
@@ -27,15 +25,18 @@ Snake.prototype = new Entity();
 Snake.prototype.rotation = 0;
 Snake.prototype.cx = 200;
 Snake.prototype.cy = 200;
-Snake.prototype.velX = 1;
+Snake.prototype.speed = 2;
+Snake.prototype.velX = 2;
 Snake.prototype.velY = 0;
+Snake.prototype.direction = 'R';
+Snake.prototype.isBlue = false;
 
 
 
-Ship.prototype.KEY_UP = 'W'.charCodeAt(0);
-Ship.prototype.KEY_DOWN  = 'S'.charCodeAt(0);
-Ship.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
-Ship.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
+Snake.prototype.KEY_UP = 'W'.charCodeAt(0);
+Snake.prototype.KEY_DOWN  = 'S'.charCodeAt(0);
+Snake.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
+Snake.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
 
 Snake.prototype.update = function (du) {
@@ -45,12 +46,7 @@ Snake.prototype.update = function (du) {
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
-    if (keys[this.KEY_UP] /*&& this.velY <= 0*/){
-        console.log("up pressed");
-        this.velX = 0;
-        this.velY = 1; 
-    }
-
+   
     this.calculateDirection();
    
     this.cx += this.velX * du;
@@ -61,36 +57,42 @@ Snake.prototype.update = function (du) {
 
     this.wrapPosition();
     
-
+/*
     var hitEntity = this.findHitEntity();
     if (hitEntity) {
         var canTakeHit = hitEntity.takeHit;
         if (canTakeHit) canTakeHit.call(hitEntity); 
         return entityManager.KILL_ME_NOW;
-    }
+    }*/
         
     spatialManager.register(this);
 };
 
 Snake.prototype.calculateDirection = function () {
-    //console.log("direction");
 
-    if (keys[this.KEY_UP] /*&& this.velY <= 0*/){
-        console.log("up pressed");
+    if (keys[this.KEY_UP] && this.direction != 'D'){
         this.velX = 0;
-        this.velY = 1; 
+        this.velY = -1*this.speed;
+        this.direction = 'U';
+        this.rotation = -Math.PI/2;
     }
-    if (keys[this.KEY_DOWN] && this.velY >= 0){
+    if (keys[this.KEY_DOWN] && this.direction != 'U'){
         this.velX = 0;
-        this.velY = -1; 
+        this.velY = this.speed; 
+        this.direction = 'D';
+        this.rotation = Math.PI/2;
     }  
-    if (keys[this.KEY_LEFT] && this.velX <= 0){
-        this.velX = 1;
+    if (keys[this.KEY_LEFT] && this.direction != 'R'){
+        this.velX = -1*this.speed;
         this.velY = 0; 
+        this.direction = 'L';
+        this.rotation = 0;
     }  
-    if (keys[this.KEY_RIGHT] && this.velX >= 0){
-        this.velX = -1;
+    if (keys[this.KEY_RIGHT] && this.direction != 'L'){
+        this.velX = this.speed;
         this.velY = 0; 
+        this.direction = 'R';
+        this.rotation = 0;
     } 
 };
 
@@ -105,10 +107,31 @@ Snake.prototype.takeHit = function () {
 };
 
 Snake.prototype.render = function (ctx) {
+    
+    if(this.direction == 'L') {
+        if(!this.isBlue){
+            g_sprites.snakeHeadL.drawWrappedCentredAt(
+                ctx, this.cx, this.cy, this.rotation
+            );
+        }else{
+            g_sprites.snakeHeadBlueL.drawWrappedCentredAt(
+                ctx, this.cx, this.cy, this.rotation
+            );
+        }
 
-    g_sprites.snakeHead.drawWrappedCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );
-
+    }
+    else {
+        if(!this.isBlue){
+            g_sprites.snakeHeadR.drawWrappedCentredAt(
+                ctx, this.cx, this.cy, this.rotation
+            );
+        }else{
+            g_sprites.snakeHeadBlueR.drawWrappedCentredAt(
+                ctx, this.cx, this.cy, this.rotation
+            );
+        }
+    }
+    
+        
     ctx.globalAlpha = 1;
 };
