@@ -107,8 +107,8 @@ generateSnake : function(descr) {
 },
 
 generateTail : function(follow) {
-    var delay = this._tail.length;
-    var delayMax = 20; // this._tail.length;
+    var delay = 0;// this._tail.length;
+    var delayMax = this._tail.length;
 
     var descr = {   follow : follow,
         cx : follow.cx,
@@ -124,6 +124,13 @@ generateGhost : function(descr) {
     this._ghosts.push(new Ghost(descr));
 },
 
+getSnakePos : function() {
+    var pos = {
+        cx : this._snake[0].cx,
+        cx : this._snake[0].cx
+    };
+    return pos;
+},
 /*
 fireBullet: function(cx, cy, velX, velY, rotation) {
     this._bullets.push(new Bullet({
@@ -191,8 +198,6 @@ update: function(du) {
         }
     }
     
-    // if (this._rocks.length === 0) this._generateRocks();
-
 },
 
 render: function(ctx) {
@@ -202,17 +207,21 @@ render: function(ctx) {
 
         var aCategory = this._categories[c];
         
-/*
-        if (!this._bShowRocks && 
-            aCategory == this._rocks)
-            continue;*/
+        // Ef tail byrja aftast að rendera looks better
+        if (aCategory == this._tail){
+            for (var i = aCategory.length-1; i >=0 ; --i) {
 
+                aCategory[i].render(ctx);
+                //debug.text(".", debugX + i * 10, debugY);
+    
+            }
+        }else{
         for (var i = 0; i < aCategory.length; ++i) {
 
             aCategory[i].render(ctx);
-            //debug.text(".", debugX + i * 10, debugY);
-
+-
         }
+    }
         debugY += 10;
     }
 }

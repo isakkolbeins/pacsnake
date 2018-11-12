@@ -109,10 +109,19 @@ Ghost.prototype._moveToASafePlace = function () {
         
     }
 };
+
+Ghost.prototype.getNextMove = function(level) {
+    // AI pælingar random sammt ekki random eftir leveli ? 
+    
+
+
+}
     
 Ghost.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+
+
     
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;

@@ -21,46 +21,54 @@ function Tail(descr) {
     // Default sprite and scale, if not otherwise specified
     this.sprite = g_sprites.snakeBoddy;
     this.scale  = this.scale  || 1;
-
-    // this.delayMax = 20;
+    this.isWaiting = true;
 
 };
 
 Tail.prototype = new Entity();
 
+Tail.prototype.delay = 200 / NOMINAL_UPDATE_INTERVAL;
+
 Tail.prototype.getNewPos = function(){
+    this.isWaiting = false;
+
     this.cx = this.follow.cx; 
     this.cy = this.follow.cy;
+
+    this.delay = 200 / NOMINAL_UPDATE_INTERVAL;
 }
+
 
 Tail.prototype.update = function (du) {
 
-    
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
-    spatialManager.unregister(this);
+    // spatialManager.unregister(this);
     
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
-    
-    if (this.delay >= this.delayMax){
-        this.getNewPos();
-        this.delay = 0;
+
+    if(!this.follow.isWaiting){
+        this.isWaiting=true;
     }
 
-    this.delay += this.delayMax/10 ;
-    // setTimeout(this.getNewPos, 100);
+    if(this.isWaiting){
+        this.delay -= du;
+    }
 
+    if (this.delay < 0) {
+        this.getNewPos();
+    }
     
-    this.rotation += 1 * this.velRot;
+    this.rotation += this.velRot;
     this.rotation = util.wrapRange(this.rotation, 0, consts.FULL_CIRCLE);
 
     this.wrapPosition();
     
-    spatialManager.register(this);
+    // spatialManager.register(this);
 };
 
 Tail.prototype.getRadius = function () {
+    // Skoða þetta 
     return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
