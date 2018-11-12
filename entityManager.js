@@ -127,7 +127,7 @@ generateGhost : function(descr) {
 getSnakePos : function() {
     var pos = {
         cx : this._snake[0].cx,
-        cx : this._snake[0].cx
+        cy : this._snake[0].cy
     };
     return pos;
 },
@@ -219,7 +219,7 @@ render: function(ctx) {
         for (var i = 0; i < aCategory.length; ++i) {
 
             aCategory[i].render(ctx);
--
+
         }
     }
         debugY += 10;

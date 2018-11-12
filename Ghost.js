@@ -26,7 +26,6 @@ function Ghost(descr) {
         this.color = 0;
     }
     
-    // Default sprite, if not otherwise specified
     switch (this.color) {
         case 0:
         this.sprite = g_sprites.ghostRed;
@@ -53,6 +52,8 @@ function Ghost(descr) {
 
 Ghost.prototype = new Entity();
 
+Ghost.prototype.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
+
 Ghost.prototype.randomisePosition = function () {
     // Rock randomisation defaults (if nothing otherwise specified)
     this.cx = this.cx || Math.random() * g_canvas.width;
@@ -71,8 +72,6 @@ Ghost.prototype.rememberResets = function () {
 
 // Initial, inheritable, default values
 Ghost.prototype.rotation = 0;
-//Ghost.prototype.cx = 200;
-//Ghost.prototype.cy = 200;
 Ghost.prototype.velX = 0;
 Ghost.prototype.velY = 1;
 
@@ -110,23 +109,72 @@ Ghost.prototype._moveToASafePlace = function () {
     }
 };
 
-Ghost.prototype.getNextMove = function(level) {
+Ghost.prototype.getBestMove = function() {
     // AI pælingar random sammt ekki random eftir leveli ? 
+    var snakePos = entityManager.getSnakePos();
     
+    var bestX = snakePos.cx - this.cx;
+    var bestY = snakePos.cy - this.cy;
 
+    if (Math.abs(bestX) >= Math.abs(bestY)){
+        this.velY = 0;
+        this.velX = bestX/Math.abs(bestX);
+   } else {
+        this.velX = 0;
+        this.velY = bestY/Math.abs(bestY);
+    }
+}
+
+Ghost.prototype.getRandomMove = function() {
+    var rand = Math.floor(Math.random()*4 +1);
+    switch (rand) {
+        case 1:
+            this.velX = 1;
+            this.velY = 0;
+            break;
+        case 1:
+            this.velX = -1;
+            this.velY = 0;
+            break;
+        case 1:
+            this.velX = 0;
+            this.velY = 1;
+            break;
+        case 1:
+            this.velX = 0;
+            this.velY = -1;
+            break;
+        default:
+            this.velX = 1;
+            this.velY = 0;
+            break;
+    }
 
 }
     
 Ghost.prototype.update = function (du) {
 
     spatialManager.unregister(this);
-
-
     
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
 
+    var rand = Math.random();
+
+    this.delay -= du;
+
+    if(this.delay < 0){
+        if (rand > 0.2){
+            this.getBestMove();
+        }else {
+            this.getRandomMove();
+        }
+        this.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
+    }
+
+    
+    
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
