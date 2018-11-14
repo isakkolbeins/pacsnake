@@ -4,9 +4,9 @@
 /*
 
 -- game info --
--- rules -- 
+-- rules --
 -- group info --
------ færa í readmefile -- 
+----- færa í readmefile --
 
 
 
@@ -37,7 +37,7 @@ function createBeginningSnake() {
         length : 10,
         direction : 'R',
     });
-    
+
 }
 
 // =============
@@ -65,9 +65,9 @@ function gatherInputs() {
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
-    
+
     processDiagnostics();
-    
+
     entityManager.update(du);
 
 }
@@ -149,6 +149,8 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
+        levelBackground : "https://notendur.hi.is/~tsp3/tolvuleikjaforritun/PacSnake/images/PacSnakeLevel.png",
+
         ghostBlue       : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
         ghostRed        : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostRead.png",
         ghostPink       : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostPink.png",
@@ -157,7 +159,7 @@ function requestPreloads() {
 
         snakeBoddy      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddy.png",
         snakeBoddyBlue  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddyBlue.png",
-        
+
         snakeHead0L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead0.png",
         snakeHead1L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead1.png",
         snakeHead2L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead2.png",
@@ -214,7 +216,7 @@ function preloadDone() {
                                             g_images.snakeHeadBlue1R,
                                             g_images.snakeHeadBlue2R,
                                             g_images.snakeHeadBlue3R]);
-   
+
     entityManager.init();
     createBeginningSnake();
 
