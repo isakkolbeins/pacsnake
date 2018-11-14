@@ -32,6 +32,7 @@ _bullets : [],
 // _ships   : [],
 _tail    : [],
 _snake   : [],
+_powerup : [],
 _bShowRocks : true,
 
 // "PRIVATE" METHODS
@@ -90,12 +91,13 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._tail, this._snake, this._ghosts];
+    this._categories = [this._bullets, this._tail, this._snake, this._ghosts, this._powerup];
 },
 
 init: function() {
     this._generateGhosts();
     //this._generateShip();
+    this.generatePowerUp();
 },
 
 generateSnake : function(descr) {
@@ -124,6 +126,10 @@ generateGhost : function(descr) {
     this._ghosts.push(new Ghost(descr));
 },
 
+generatePowerUp : function(descr) {
+    this._powerup.push(new PowerUp(descr));
+},
+
 getSnakePos : function() {
     var pos = {
         cx : this._snake[0].cx,
@@ -131,6 +137,11 @@ getSnakePos : function() {
     };
     return pos;
 },
+
+getSnakeIsBlue : function() {
+    return this._snake[0].isBlue;
+},
+
 /*
 fireBullet: function(cx, cy, velX, velY, rotation) {
     this._bullets.push(new Bullet({
@@ -212,7 +223,7 @@ render: function(ctx) {
             for (var i = aCategory.length-1; i >=0 ; --i) {
 
                 aCategory[i].render(ctx);
-                //debug.text(".", debugX + i * 10, debugY);
+                // debug.text(".", debugX + i * 10, debugY);
     
             }
         }else{

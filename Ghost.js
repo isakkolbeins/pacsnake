@@ -41,13 +41,15 @@ function Ghost(descr) {
             break;
     
         default:
-        this.sprite = this.sprite;
+        this.sprite = this.sprite.ghostBlue;
             break;
     }
     
     // Set normal drawing scale, and warp state off
-    this._scale = 1;
-    this._isWarping = false;
+    this.scale = 1;
+    // this._isWarping = false;
+    this.isEdible = false;
+
 };
 
 Ghost.prototype = new Entity();
@@ -125,6 +127,12 @@ Ghost.prototype.getBestMove = function() {
     }
 }
 
+Ghost.prototype.getWorstMove = function() {
+    this.getBestMove()
+    this.velX = this.velX * -1;
+    this.velY = this.velY * -1; 
+}
+
 Ghost.prototype.getRandomMove = function() {
     var rand = Math.floor(Math.random()*4 +1);
     switch (rand) {
@@ -132,15 +140,15 @@ Ghost.prototype.getRandomMove = function() {
             this.velX = 1;
             this.velY = 0;
             break;
-        case 1:
+        case 2:
             this.velX = -1;
             this.velY = 0;
             break;
-        case 1:
+        case 3:
             this.velX = 0;
             this.velY = 1;
             break;
-        case 1:
+        case 4:
             this.velX = 0;
             this.velY = -1;
             break;
@@ -164,33 +172,54 @@ Ghost.prototype.update = function (du) {
 
     this.delay -= du;
 
-    if(this.delay < 0){
-        if (rand > 0.2){
-            this.getBestMove();
-        }else {
-            this.getRandomMove();
-        }
-        this.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
-    }
+    if(entityManager.getSnakeIsBlue()){
+        this.isEdible = true;
+        this.sprite = g_sprites.ghostEdible;
+    } 
 
-    
+    if(this.delay < 0){
+        if(this.isEdible){
+            /// ATH ---- skoða eh skrítið
+            this.getWorstMove();
+        }else{
+            if (rand > 0.2){
+                this.getBestMove();
+            }else {
+                this.getRandomMove();
+            }
+        this.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
+        }
+    }  
+    this.wrapPosition();
     
     this.cx += this.velX * du;
     this.cy += this.velY * du;
+    
+    
+        
 
-    this.wrapPosition();
+    spatialManager.register(this);
 
 };
 
 
 Ghost.prototype.getRadius = function () {
-    return this.sprite.width;
+    return this.scale * (this.sprite.width / 2);
+};
+
+Ghost.prototype.eat = function () {
+    this.kill();
 };
 
 Ghost.prototype.reset = function () {
     this.setPos(this.reset_cx, this.reset_cy);
     this.rotation = this.reset_rotation;
+    this.resetSprite();
 };
+
+Ghost.prototype.resetSprite = function () {
+    this.sprite = this.sprite.reset;
+}
 
 
 Ghost.prototype.render = function (ctx) {

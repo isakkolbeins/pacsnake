@@ -63,13 +63,13 @@ findEntityInRange: function(posX, posY, radius) {
 
     // TODO: YOUR STUFF HERE!
     
-    var entityInRange = null;
+    var entityInRange = [];
     this._entities.forEach(entity => {
         // Distance from center of entiti forom x and y
         let dist = Math.sqrt(util.distSq(posX, posY,entity.posX, entity.posY));
         // Check if on range from both radiuses 
         if(entity.radius + radius > dist){
-            entityInRange = entity;                  // BOOM
+            entityInRange.push(entity);                  // BOOM
         }
     });
     return entityInRange;

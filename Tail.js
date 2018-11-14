@@ -22,6 +22,7 @@ function Tail(descr) {
     this.sprite = g_sprites.snakeBoddy;
     this.scale  = this.scale  || 1;
     this.isWaiting = true;
+    this.isBlue = false;
 
 };
 
@@ -41,7 +42,7 @@ Tail.prototype.getNewPos = function(){
 
 Tail.prototype.update = function (du) {
 
-    // spatialManager.unregister(this);
+    spatialManager.unregister(this);
     
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
@@ -63,8 +64,10 @@ Tail.prototype.update = function (du) {
     this.rotation = util.wrapRange(this.rotation, 0, consts.FULL_CIRCLE);
 
     this.wrapPosition();
+
+    this.updateSprite();
     
-    // spatialManager.register(this);
+    spatialManager.register(this);
 };
 
 Tail.prototype.getRadius = function () {
@@ -72,7 +75,18 @@ Tail.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
+/*
+Tail.prototype.turnBlue = function() {
+    this.isBlue = true;
+}*/
 
+
+Tail.prototype.updateSprite = function () {
+    if(entityManager.getSnakeIsBlue()) this.isBlue = true;
+    else this.isBlue = false;
+    if(this.isBlue) this.sprite = g_sprites.snakeBoddyBlue;
+    else this.sprite = g_sprites.snakeBoddy;
+}
 
 Tail.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
