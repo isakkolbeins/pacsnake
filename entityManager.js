@@ -137,6 +137,11 @@ getSnakePos : function() {
     };
     return pos;
 },
+
+getSnakeIsBlue : function() {
+    return this._snake[0].isBlue;
+},
+
 /*
 fireBullet: function(cx, cy, velX, velY, rotation) {
     this._bullets.push(new Bullet({

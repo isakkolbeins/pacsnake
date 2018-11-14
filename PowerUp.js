@@ -78,7 +78,7 @@ PowerUp.prototype.getRadius = function () {
 };
 
 
-PowerUp.prototype.eaten = function () {
+PowerUp.prototype.eat = function () {
     this.kill();
 };
 

@@ -19,6 +19,7 @@ function Snake(descr) {
     this.setup(descr);
     this.sprite = g_sprites.snakeHeadR;
     this.isEdible = false;
+    this.isBlue = false;
 
 }
 
@@ -61,15 +62,18 @@ Snake.prototype.update = function (du) {
     this.wrapPosition();
     this.updateSprite();
 
-    var hitEntity = this.findHitEntity();
+    var hitEntitys = this.findHitEntity();
+    if (hitEntitys.length > 0) {
 
-    if (hitEntity) {
-        var canTakeHit = hitEntity.takeHit;
-        if (canTakeHit) canTakeHit.call(hitEntity);
-        if(hitEntity.isEdible){
-            this.isBlue = true;
-        }
-
+        hitEntitys.forEach(hitEntity => {
+            var edible = hitEntity.eat;
+            if(hitEntity.isEdible){
+                this.isBlue = true;
+                edible.call(hitEntity);
+            }
+            //if (edible) canTakeHit.call(hitEntity);
+        });
+    
         
     }
         
@@ -109,6 +113,7 @@ Snake.prototype.getRadius = function () {
 };
 
 Snake.prototype.ghostHit = function () {
+
     // Ath hvort matur eða drepa
     this.kill();  
 };

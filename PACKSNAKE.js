@@ -34,7 +34,7 @@ function createBeginningSnake() {
     entityManager.generateSnake({
         cx : 200,
         cy : 200,
-        length : 10,
+        length : 2,
         direction : 'R',
     });
     
