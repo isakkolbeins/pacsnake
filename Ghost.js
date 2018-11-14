@@ -41,13 +41,15 @@ function Ghost(descr) {
             break;
     
         default:
-        this.sprite = this.sprite;
+        this.sprite = this.sprite.ghostBlue;
             break;
     }
     
     // Set normal drawing scale, and warp state off
-    this._scale = 1;
-    this._isWarping = false;
+    this.scale = 1;
+    // this._isWarping = false;
+    this.isEdible = false;
+
 };
 
 Ghost.prototype = new Entity();
@@ -132,15 +134,15 @@ Ghost.prototype.getRandomMove = function() {
             this.velX = 1;
             this.velY = 0;
             break;
-        case 1:
+        case 2:
             this.velX = -1;
             this.velY = 0;
             break;
-        case 1:
+        case 3:
             this.velX = 0;
             this.velY = 1;
             break;
-        case 1:
+        case 4:
             this.velX = 0;
             this.velY = -1;
             break;
@@ -173,18 +175,17 @@ Ghost.prototype.update = function (du) {
         this.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
     }
 
-    
-    
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
     this.wrapPosition();
+    spatialManager.register(this);
 
 };
 
 
 Ghost.prototype.getRadius = function () {
-    return this.sprite.width;
+    return this.scale * (this.sprite.width / 2);
 };
 
 Ghost.prototype.reset = function () {

@@ -41,7 +41,7 @@ Tail.prototype.getNewPos = function(){
 
 Tail.prototype.update = function (du) {
 
-    // spatialManager.unregister(this);
+    spatialManager.unregister(this);
     
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
@@ -64,7 +64,7 @@ Tail.prototype.update = function (du) {
 
     this.wrapPosition();
     
-    // spatialManager.register(this);
+    spatialManager.register(this);
 };
 
 Tail.prototype.getRadius = function () {
