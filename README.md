@@ -1,5 +1,6 @@
 # REGLUR
 1. Snákurinn byrjar í lengd 3-4
+
 2.Draugar elta hann að vissu leyti
 3. Borðið er með útjtaðar veggi en einnig göt til að fara í gegnum þá veggi og koma út hinum megin. Spawn-box fyrir drauga verður á miðju borðinu á samt 4 hard box obsticles inná vellinum.
 4. candy kúlur munu birtast á vissum stöðum á vellinum og eftir x tíma respawna á sama stað.
