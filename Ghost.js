@@ -214,8 +214,14 @@ Ghost.prototype.update = function (du) {
     }  
     this.wrapPosition();
     
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
+    if(Level.checkCollisionGhost((this.cx + this.velX * du), (this.cy + this.velY * du))){
+        this.cx -= this.velX * du;
+        this.cy -= this.velY * du;
+    } else {
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+    }
+    
     
     
         
