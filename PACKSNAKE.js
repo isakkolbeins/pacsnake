@@ -32,8 +32,8 @@ var g_ctx = g_canvas.getContext("2d");
 function createBeginningSnake() {
 
     entityManager.generateSnake({
-        cx : 200,
-        cy : 200,
+        cx : 100,
+        cy : 100,
         length : 2,
         direction : 'R',
     });

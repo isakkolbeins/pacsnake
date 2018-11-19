@@ -56,7 +56,7 @@ Snake.prototype.update = function (du) {
     this.calculateDirection();
 
 
-    if(Level.checkCollisionSnake((this.cx + this.velX * du), (this.xy + this.velY * du))){
+    if(!Level.checkCollisionSnake((this.cx + this.velX * du), (this.xy + this.velY * du))){
         this.cx += this.velX * du;
         this.cy += this.velY * du;
     }
