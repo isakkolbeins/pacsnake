@@ -128,9 +128,18 @@ Ghost.prototype.getBestMove = function() {
 }
 
 Ghost.prototype.getWorstMove = function() {
-    this.getBestMove()
-    this.velX = this.velX * -1;
-    this.velY = this.velY * -1; 
+    var snakePos1 = entityManager.getSnakePos();
+    
+    var worstX = snakePos1.cx - this.cx;
+    var worstY = snakePos1.cy - this.cy;
+
+    if (Math.abs(worstX) >= Math.abs(worstY)){
+        this.velX = 0;
+        this.velY = worstX/Math.abs(worstX);
+   } else {
+        this.velY = 0;
+        this.velX = worstY/Math.abs(worstY);
+    }
 }
 
 Ghost.prototype.getRandomMove = function() {
