@@ -128,8 +128,7 @@ checkCollisionSnake : function(nextXPoint, nextYPoint) {
 
     var x = Math.round(nextXPoint/20);
     var y = Math.round(nextYPoint/20);
-    console.log(x);
-    return this.level[x][y] == 1 || this.level[x][y] == 2;
+    return this.level[x][y] === 1 || this.level[x][y] === 2;
     // var possibleCollision = nextPoint(xPoint, yPoint, direction);
     // return level[possibleCollision[0]][possibleCollision[1]] == 1;
 },
