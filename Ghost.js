@@ -188,7 +188,10 @@ Ghost.prototype.update = function (du) {
     if(entityManager.getSnakeIsBlue() && !this.hasRespawned){
         this.isEdible = true;
         this.sprite = g_sprites.ghostEdible;
-    } 
+    } else if (!entityManager.getSnakeIsBlue() && !this.hasRespawned){
+        this.isEdible = false;
+        this.sprite = this.reset_sprite;
+    }
 
     if(this.delay < 0){
         if(this.isEdible){
