@@ -33,6 +33,7 @@ _bullets : [],
 _tail    : [],
 _snake   : [],
 _powerup : [],
+_food : [],
 _bShowRocks : true,
 
 // "PRIVATE" METHODS
@@ -91,7 +92,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._tail, this._snake, this._ghosts, this._powerup];
+    this._categories = [this._bullets, this._tail, this._snake, this._ghosts, this._powerup,this._food];
 },
 
 init: function() {
@@ -103,7 +104,7 @@ init: function() {
 generateSnake : function(descr) {
     this._snake.push(new Snake(descr));
     this.generateTail(this._snake[0]);
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < descr.length; i++) {
         this.generateTail(this._tail[i]);
     }
 },
@@ -145,6 +146,12 @@ getSnakePos : function() {
 getSnakeIsBlue : function() {
     return this._snake[0].isBlue;
 },
+
+generateFood : function(){
+    this._food.push(new Food({cx:20,cy:20}));
+},
+
+
 
 
 
@@ -255,8 +262,6 @@ render: function(ctx) {
 }
 
 }
-
-
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
