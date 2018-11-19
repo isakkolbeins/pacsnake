@@ -71,6 +71,7 @@ Snake.prototype.update = function (du) {
     //check if snake has eaten a powerUp
     this.eatPowerUp();
     if(powerUpEaten === true){
+        powerUpEaten = false;
         setTimeout(this.back2Normal.bind(this), 10000);
     }
         
@@ -139,7 +140,7 @@ Snake.prototype.eatPowerUp = function () {
 Snake.prototype.back2Normal = function () {
     // After x time, the snake turns back yellow and cannot eat the ghosts
     this.isBlue = false;
-    powerUpEaten = false;
+    
 };
 
 Snake.prototype.updateSprite = function () {
