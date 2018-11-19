@@ -42,8 +42,8 @@
 //     [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
 //     [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
 // ];
-
-var level = [
+var Level = {
+ level : [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -84,7 +84,7 @@ var level = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-];
+],
 
 // Finds the next element the PacSnake or Ghost goes to in the
 // level matrix given the direction and current position
@@ -124,12 +124,14 @@ var level = [
 // }
 
 // Returns true if the PacSnake collides with a wall
-function checkCollisionSnake(nextXPoint, nextYPoint) {
-    return level[nextXPoint/50][nextYPoint/50] == 1 || level[nextXPoint/50][nextYPoint/50] == 2;
+checkCollisionSnake : function(nextXPoint, nextYPoint) {
+    console.log(nextXPoint);
+    return this.level[nextXPoint/50][nextYPoint/50] == 1 || this.level[nextXPoint/50][nextYPoint/50] == 2;
     // var possibleCollision = nextPoint(xPoint, yPoint, direction);
     // return level[possibleCollision[0]][possibleCollision[1]] == 1;
+},
+
+checkCollisionGhost: function(direction) {
+
 }
-
-function checkCollisionGhost(direction) {
-
 }
