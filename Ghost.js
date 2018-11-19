@@ -209,7 +209,10 @@ Ghost.prototype.getRadius = function () {
 
 Ghost.prototype.eat = function () {
     this.kill();
+   
+   this.respawn();
 };
+
 
 Ghost.prototype.reset = function () {
     this.setPos(this.reset_cx, this.reset_cy);
@@ -218,6 +221,7 @@ Ghost.prototype.reset = function () {
 };
 
 Ghost.prototype.respawn = function(){
+    this.resurrect();
     this.setPos(g_canvas.width*0.5,g_canvas.height*0.5);
     this.rotation = this.reset_rotation;
     this.resetSprite();
