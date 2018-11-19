@@ -103,7 +103,7 @@ init: function() {
 generateSnake : function(descr) {
     this._snake.push(new Snake(descr));
     this.generateTail(this._snake[0]);
-    for (let i = 0; i < descr.length; i++) {
+    for (let i = 0; i < 4; i++) {
         this.generateTail(this._tail[i]);
     }
 },
@@ -257,13 +257,6 @@ render: function(ctx) {
 }
 
 
-//setInterval(function(){
-  //  entityManager.generatePowerUp();
-//},3000);
-
-setInterval(function(){
-        entityManager.generatePowerUp();
-    },3000);
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
