@@ -83,7 +83,7 @@ PowerUp.prototype.eat = function () {
     setTimeout(function(){
        entityManager.generatePowerUp(); 
     },3000);
-    entityManager._snake[0].PowerUpEaten = true;
+    
 };
 
 
