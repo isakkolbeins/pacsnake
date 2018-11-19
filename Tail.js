@@ -23,6 +23,7 @@ function Tail(descr) {
     this.scale  = this.scale  || 1;
     this.isWaiting = true;
     this.isBlue = false;
+    // this.cx = this.cx-10;
 
 };
 
@@ -33,11 +34,51 @@ Tail.prototype.delay = 200 / NOMINAL_UPDATE_INTERVAL;
 Tail.prototype.getNewPos = function(){
     this.isWaiting = false;
 
+
     this.cx = this.follow.cx; 
     this.cy = this.follow.cy;
+    this.direction = this.follow.direction;
+    // this.shouldUpdate();
 
     this.delay = 200 / NOMINAL_UPDATE_INTERVAL;
 }
+
+Tail.prototype.shouldUpdate = function() {
+    var u = 30;
+    // console.log(this.cx + " -- " + this.follow.cx   );
+    /*if(util.distSq(this.cx, this.cy, this.follow.cx, this.follow.cy) > util.square(u)){
+        this.cx = this.follow.cx;
+        this.cy = this.follow.cy;
+        
+        // this.isWaiting = false;
+    } */
+    switch (this.direction) {
+        case 'U':
+            this.cx = this.follow.cx;
+            this.cy = this.follow.cy+20;
+            break;
+        case 'D':
+            this.cx = this.follow.cx;
+            this.cy = this.follow.cy-20;
+            break;
+        case 'R':
+            this.cx = this.follow.cx-20;
+            this.cy = this.follow.cy;
+            break;
+        case 'L':
+            this.cx = this.follow.cx+20;
+            this.cy = this.follow.cy;
+            break;
+    
+        default:
+            break;
+    }
+    // this.direction = this.follow.direction;
+
+    
+
+}
+
 
 
 Tail.prototype.update = function (du) {
@@ -51,15 +92,20 @@ Tail.prototype.update = function (du) {
     if(!this.follow.isWaiting){
         this.isWaiting=true;
     }
-
+    
     if(this.isWaiting){
         this.delay -= du;
     }
 
+
     if (this.delay < 0) {
         this.getNewPos();
     }
+    // this.shouldUpdate();
     
+    
+
+
     this.rotation += this.velRot;
     this.rotation = util.wrapRange(this.rotation, 0, consts.FULL_CIRCLE);
 
