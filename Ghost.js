@@ -217,6 +217,12 @@ Ghost.prototype.reset = function () {
     this.resetSprite();
 };
 
+Ghost.prototype.respawn = function(){
+    this.setPos(g_canvas.width*0.5,g_canvas.height*0.5);
+    this.rotation = this.reset_rotation;
+    this.resetSprite();
+}
+
 Ghost.prototype.resetSprite = function () {
     this.sprite = this.sprite.reset;
 }
