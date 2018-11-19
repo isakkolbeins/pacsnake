@@ -66,11 +66,9 @@ Snake.prototype.update = function (du) {
 
     //check if snake has eaten a powerUp
     this.eatPowerUp();
-    if(powerUpEaten){
+    if(powerUpEaten === true){
         setTimeout(this.back2Normal.bind(this), 10000);
     }
-    
-    
         
     spatialManager.register(this);
 };
@@ -120,7 +118,6 @@ Snake.prototype.eatFood = function () {
 Snake.prototype.eatPowerUp = function () {
     // Set snake, tail and ghosts to blue 
     // Make ghosts edible
-    powerUpEaten = true;
     var hitEntitys = this.findHitEntity();
     if (hitEntitys.length > 0) {
 
@@ -128,6 +125,7 @@ Snake.prototype.eatPowerUp = function () {
             var edible = hitEntity.eat;
             if(hitEntity.isEdible){
                 this.isBlue = true;
+                powerUpEaten = true;
                 edible.call(hitEntity);
             }
         });   
@@ -137,6 +135,7 @@ Snake.prototype.eatPowerUp = function () {
 Snake.prototype.back2Normal = function () {
     // After x time, the snake turns back yellow and cannot eat the ghosts
     this.isBlue = false;
+    powerUpEaten = false;
 };
 
 Snake.prototype.updateSprite = function () {

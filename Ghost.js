@@ -182,7 +182,7 @@ Ghost.prototype.update = function (du) {
     }
 
     var rand = Math.random();
-    var col = this.color;
+    let col = this.color;
     this.delay -= du;
 
     if(entityManager.getSnakeIsBlue() && !this.hasRespawned){
@@ -190,7 +190,7 @@ Ghost.prototype.update = function (du) {
         this.sprite = g_sprites.ghostEdible;
     } else if (!entityManager.getSnakeIsBlue() && !this.hasRespawned){
         this.isEdible = false;
-        this.color = col;
+        this.sprite = this.reset_sprite;
     }
 
     
