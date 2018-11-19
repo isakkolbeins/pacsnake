@@ -42,6 +42,8 @@ Snake.prototype.KEY_DOWN  = 'S'.charCodeAt(0);
 Snake.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Snake.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
+var powerUpEaten = false; 
+
 
 Snake.prototype.update = function (du) {
 
@@ -62,20 +64,13 @@ Snake.prototype.update = function (du) {
     this.wrapPosition();
     this.updateSprite();
 
-    var hitEntitys = this.findHitEntity();
-    if (hitEntitys.length > 0) {
-
-        hitEntitys.forEach(hitEntity => {
-            var edible = hitEntity.eat;
-            if(hitEntity.isEdible){
-                this.isBlue = true;
-                edible.call(hitEntity);
-            }
-            //if (edible) canTakeHit.call(hitEntity);
-        });
-    
-        
+    //check if snake has eaten a powerUp
+    this.eatPowerUp();
+    if(powerUpEaten){
+        setTimeout(this.back2Normal.bind(this), 10000);
     }
+    
+    
         
     spatialManager.register(this);
 };
@@ -125,6 +120,23 @@ Snake.prototype.eatFood = function () {
 Snake.prototype.eatPowerUp = function () {
     // Set snake, tail and ghosts to blue 
     // Make ghosts edible
+    powerUpEaten = true;
+    var hitEntitys = this.findHitEntity();
+    if (hitEntitys.length > 0) {
+
+        hitEntitys.forEach(hitEntity => {
+            var edible = hitEntity.eat;
+            if(hitEntity.isEdible){
+                this.isBlue = true;
+                edible.call(hitEntity);
+            }
+        });   
+    }
+};
+
+Snake.prototype.back2Normal = function () {
+    // After x time, the snake turns back yellow and cannot eat the ghosts
+    this.isBlue = false;
 };
 
 Snake.prototype.updateSprite = function () {

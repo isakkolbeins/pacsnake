@@ -182,13 +182,18 @@ Ghost.prototype.update = function (du) {
     }
 
     var rand = Math.random();
-
+    var col = this.color;
     this.delay -= du;
 
     if(entityManager.getSnakeIsBlue() && !this.hasRespawned){
         this.isEdible = true;
         this.sprite = g_sprites.ghostEdible;
-    } 
+    } else if (!entityManager.getSnakeIsBlue() && !this.hasRespawned){
+        this.isEdible = false;
+        this.color = col;
+    }
+
+    
 
     if(this.delay < 0){
         if(this.isEdible){
