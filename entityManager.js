@@ -257,10 +257,10 @@ render: function(ctx) {
 }
 
 
-setInterval(function(){
-    entityManager.generatePowerUp();
-},3000);
 
+setInterval(function(){
+        entityManager.generatePowerUp();
+    },3000);
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
