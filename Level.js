@@ -84,49 +84,50 @@ var level = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-]
+];
 
 // Finds the next element the PacSnake or Ghost goes to in the
 // level matrix given the direction and current position
-function nextPoint(xPoint, yPoint, direction) {
-    var nextPoi = [xPoint, yPoint];
-    switch (direction) {
-        case 'D':
-            if (yPoint + 1 == level.length) {
-                nextCoo[1] = 0;
-            } else {
-                nextCoo[1] = nextCoo[1] + 1;
-            }
-            break;
-        case 'U':
-            if (yPoint - 1 < 0) {
-                nextCoo[1] = level.length - 1;
-            } else {
-                nextCoo[1] = nextCoo[1] - 1;
-            }
-            break;
-        case 'L':
-            if (xPoint - 1 < 0) {
-                nextCoo[0] = level[0].length - 1;
-            } else {
-                nextCoo[0] = nextCoo[0] - 1;
-            }
-            break;
-        case 'R':
-            if (xPoint + 1 == level[0].length) {
-                nextCoo[0] = 0;
-            } else {
-                nextCoo[0] = nextCoo[0] + 1;
-            }
-            break;
-    }
-    return nextPoi;
-}
+// function nextPoint(xPoint, yPoint, direction) {
+//     var nextPoi = [xPoint, yPoint];
+//     switch (direction) {
+//         case 'D':
+//             if (yPoint + 1 == level.length) {
+//                 nextCoo[1] = 0;
+//             } else {
+//                 nextCoo[1] = nextCoo[1] + 1;
+//             }
+//             break;
+//         case 'U':
+//             if (yPoint - 1 < 0) {
+//                 nextCoo[1] = level.length - 1;
+//             } else {
+//                 nextCoo[1] = nextCoo[1] - 1;
+//             }
+//             break;
+//         case 'L':
+//             if (xPoint - 1 < 0) {
+//                 nextCoo[0] = level[0].length - 1;
+//             } else {
+//                 nextCoo[0] = nextCoo[0] - 1;
+//             }
+//             break;
+//         case 'R':
+//             if (xPoint + 1 == level[0].length) {
+//                 nextCoo[0] = 0;
+//             } else {
+//                 nextCoo[0] = nextCoo[0] + 1;
+//             }
+//             break;
+//     }
+//     return nextPoi;
+// }
 
 // Returns true if the PacSnake collides with a wall
-function checkCollisionSnake(xPoint, yPoint, direction) {
-    var possibleCollision = nextPoint(xPoint, yPoint, direction);
-    return level[possibleCollision[0]][possibleCollision[1]] == 1;
+function checkCollisionSnake(nextXPoint, nextYPoint) {
+    return level[nextXPoint/50][nextYPoint/50] == 1 || level[nextXPoint/50][nextYPoint/50] == 2;
+    // var possibleCollision = nextPoint(xPoint, yPoint, direction);
+    // return level[possibleCollision[0]][possibleCollision[1]] == 1;
 }
 
 function checkCollisionGhost(direction) {
