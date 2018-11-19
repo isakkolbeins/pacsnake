@@ -149,7 +149,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        levelBackground : "https://notendur.hi.is/~tsp3/tolvuleikjaforritun/PacSnake/images/PacSnakeLevel.png",
+        levelBackground : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/background.png",
 
         ghostBlue       : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
         ghostRed        : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostRead.png",
