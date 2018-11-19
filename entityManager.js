@@ -146,6 +146,10 @@ getSnakeIsBlue : function() {
     return this._snake[0].isBlue;
 },
 
+
+
+
+
 /*
 fireBullet: function(cx, cy, velX, velY, rotation) {
     this._bullets.push(new Bullet({
@@ -220,6 +224,8 @@ update: function(du) {
         }
     }
     
+
+    
 },
 
 render: function(ctx) {
@@ -249,6 +255,12 @@ render: function(ctx) {
 }
 
 }
+
+
+setInterval(function(){
+    entityManager.generatePowerUp();
+},3000);
+
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
