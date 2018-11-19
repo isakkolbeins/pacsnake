@@ -126,6 +126,10 @@ generateGhost : function(descr) {
     this._ghosts.push(new Ghost(descr));
 },
 
+resurrectGhost : function(ghost) {
+    this._ghosts.push(ghost);
+},
+
 generatePowerUp : function(descr) {
     this._powerup.push(new PowerUp(descr));
 },
@@ -199,9 +203,16 @@ update: function(du) {
             var status = aCategory[i].update(du);
 
             if (status === this.KILL_ME_NOW) {
+                if(aCategory === this._ghosts){
+                    var deadGhost = aCategory[i];
+                    setTimeout(deadGhost.respawn.bind(deadGhost), 3000);
+                    aCategory.splice(i,1);
+                } else {
+                    aCategory.splice(i,1);
+                }
+
                 // remove the dead guy, and shuffle the others down to
                 // prevent a confusing gap from appearing in the array
-                aCategory.splice(i,1);
             }
             else {
                 ++i;
@@ -219,7 +230,7 @@ render: function(ctx) {
         var aCategory = this._categories[c];
         
         // Ef tail byrja aftast að rendera looks better
-        if (aCategory == this._tail){
+        if (aCategory === this._tail){
             for (var i = aCategory.length-1; i >=0 ; --i) {
 
                 aCategory[i].render(ctx);

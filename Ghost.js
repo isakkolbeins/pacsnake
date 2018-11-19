@@ -20,7 +20,6 @@ function Ghost(descr) {
 
     this.randomisePosition();
 
-    this.rememberResets();
 
     if(!this.color){
         this.color = 0;
@@ -49,6 +48,10 @@ function Ghost(descr) {
     this.scale = 1;
     // this._isWarping = false;
     this.isEdible = false;
+    this.hasRespawned = false;
+
+    this.rememberResets();
+
 
 };
 
@@ -68,6 +71,7 @@ Ghost.prototype.rememberResets = function () {
     this.reset_cx = this.cx;
     this.reset_cy = this.cy;
     this.reset_rotation = this.rotation;
+    this.reset_sprite = this.sprite;
 };
 
 
@@ -181,7 +185,7 @@ Ghost.prototype.update = function (du) {
 
     this.delay -= du;
 
-    if(entityManager.getSnakeIsBlue()){
+    if(entityManager.getSnakeIsBlue() && !this.hasRespawned){
         this.isEdible = true;
         this.sprite = g_sprites.ghostEdible;
     } 
@@ -189,7 +193,13 @@ Ghost.prototype.update = function (du) {
     if(this.delay < 0){
         if(this.isEdible){
             /// ATH ---- skoða eh skrítið
-            this.getWorstMove();
+            //this.getWorstMove();
+            if (rand > 0.2){
+                this.getWorstMove();
+            }else {
+                this.getRandomMove();
+            }
+        this.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
         }else{
             if (rand > 0.2){
                 this.getBestMove();
@@ -218,28 +228,22 @@ Ghost.prototype.getRadius = function () {
 
 Ghost.prototype.eat = function () {
     this.kill();
-   
-   this.respawn();
 };
-
 
 Ghost.prototype.reset = function () {
     this.setPos(this.reset_cx, this.reset_cy);
     this.rotation = this.reset_rotation;
-    this.resetSprite();
+    this.sprite = this.reset_sprite;
 };
 
 Ghost.prototype.respawn = function(){
-    this.resurrect();
+    this.reset();
     this.setPos(g_canvas.width*0.5,g_canvas.height*0.5);
-    this.rotation = this.reset_rotation;
-    this.resetSprite();
+    this.isEdible = false;
+    this.hasRespawned = true;
+    this.resurrect();
+    entityManager.resurrectGhost(this)
 }
-
-Ghost.prototype.resetSprite = function () {
-    this.sprite = this.sprite.reset;
-}
-
 
 Ghost.prototype.render = function (ctx) {
     this.sprite.drawWrappedCentredAt(
