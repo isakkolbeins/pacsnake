@@ -61,8 +61,30 @@ Ghost.prototype.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 Ghost.prototype.randomisePosition = function () {
     // Rock randomisation defaults (if nothing otherwise specified)
-    this.cx = this.cx || Math.random() * g_canvas.width;
-    this.cy = this.cy || Math.random() * g_canvas.height;
+    this.cx = this.cx || 360 + Math.random() * 80;
+    this.cy = this.cy || 370 + Math.random() * 60;
+    var ran = Math.floor(Math.random()*4);
+    switch (ran) {
+        case 0:
+        this.velX = 1;
+        this.velY = 0;
+            break;
+        case 1:
+        this.velX = -1;
+        this.velY = 0;
+            break;
+        case 2:
+        this.velY = 1;
+        this.velX = 0;
+            break;
+        case 3:
+        this.velY = -1;
+        this.velx = 0;
+            break;
+    
+        default:
+            break;
+    }
     this.rotation = this.rotation || 0;
 };
 
@@ -78,8 +100,8 @@ Ghost.prototype.rememberResets = function () {
 
 // Initial, inheritable, default values
 Ghost.prototype.rotation = 0;
-Ghost.prototype.velX = 0;
-Ghost.prototype.velY = 1;
+//Ghost.prototype.velX = 0;
+//Ghost.prototype.velY = 1;
 
 
 Ghost.prototype._moveToASafePlace = function () {
