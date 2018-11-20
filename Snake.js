@@ -135,7 +135,7 @@ Snake.prototype.eatSelf = function(){
     if(tailhits.length > 4){
         tailhits.forEach(hitEntity => {
             if(g_canDie){
-                console.log("should die!!");
+                console.log("you die now!!");
                 
                 this.kill();
                 g_isUpdatePaused=true;
