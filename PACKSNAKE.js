@@ -51,34 +51,34 @@ function createFood(){
 
     for(var i=0;i<18;i++){
         for(var j=0;j<18;j++){
-        
+
             if((i < 2)||(i>15)){
-              entityManager.generateFood(new Food({cx:x,cy:y}));  
+              entityManager.generateFood(new Food({cx:x,cy:y}));
             }
             else if((j<2)||(j>15)){
-              entityManager.generateFood(new Food({cx:x,cy:y})); 
+              entityManager.generateFood(new Food({cx:x,cy:y}));
             }
             else if(((i===5)||(i===6))&&((j>3)&&(j<14))){
-              entityManager.generateFood(new Food({cx:x,cy:y})); 
+              entityManager.generateFood(new Food({cx:x,cy:y}));
             }
             else if(((i===11)||(i===12))&&((j>3)&&(j<14))){
-                entityManager.generateFood(new Food({cx:x,cy:y})); 
+                entityManager.generateFood(new Food({cx:x,cy:y}));
             }
             else if(((j===4)||(j===5))&&((i>=5)&&(i<=12))){
-                entityManager.generateFood(new Food({cx:x,cy:y})); 
+                entityManager.generateFood(new Food({cx:x,cy:y}));
             }
             else if(((j===12)||(j===13))&&((i>=5)&&(i<=12))){
-                entityManager.generateFood(new Food({cx:x,cy:y})); 
+                entityManager.generateFood(new Food({cx:x,cy:y}));
             }
-            
-           
-        x += 40; 
+
+
+        x += 40;
         }
         x = 60;
         y += 40;
     }
-    
-    
+
+
 }
 
 
@@ -93,6 +93,10 @@ add_score : function(num){
     this.score = this.score + num;
 },
 
+get_score : function(){
+    return this.score;
+},
+
 show_score : function(ctx){
     ctx.save();
     ctx.fillStyle="white";
@@ -104,7 +108,7 @@ show_score : function(ctx){
 }
 
 
- 
+
 
 
 // =============
@@ -216,7 +220,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        levelBackground : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/background.png",
+        levelBackground : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/backgroundvol2.png",
 
         ghostBlue       : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
         ghostRed        : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostRead.png",
@@ -293,4 +297,3 @@ function preloadDone() {
 
 // Kick it off
 requestPreloads();
-

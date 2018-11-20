@@ -24,7 +24,7 @@ function Ghost(descr) {
     if(!this.color){
         this.color = 0;
     }
-    
+
     switch (this.color) {
         case 0:
         this.sprite = g_sprites.ghostRed;
@@ -38,12 +38,12 @@ function Ghost(descr) {
         case 3:
         this.sprite = g_sprites.ghostBlue;
             break;
-    
+
         default:
         this.sprite = this.sprite.ghostBlue;
             break;
     }
-    
+
     // Set normal drawing scale, and warp state off
     this.scale = 1;
     // this._isWarping = false;
@@ -79,9 +79,9 @@ Ghost.prototype.randomisePosition = function () {
             break;
         case 3:
         this.velY = -1;
-        this.velx = 0;
+        this.velX = 0;
             break;
-    
+
         default:
             break;
     }
@@ -113,15 +113,15 @@ Ghost.prototype._moveToASafePlace = function () {
         isSafePlace = false;
 
     for (var attempts = 0; attempts < 100; ++attempts) {
-    
+
         var warpDistance = 100 + Math.random() * g_canvas.width /2;
         var warpDirn = Math.random() * consts.FULL_CIRCLE;
-        
+
         this.cx = origX + warpDistance * Math.sin(warpDirn);
         this.cy = origY - warpDistance * Math.cos(warpDirn);
-        
+
         this.wrapPosition();
-        
+
         // Don't go too near the edges, and don't move into a collision!
         if (!util.isBetween(this.cx, MARGIN, g_canvas.width - MARGIN)) {
             isSafePlace = false;
@@ -133,14 +133,14 @@ Ghost.prototype._moveToASafePlace = function () {
 
         // Get out as soon as we find a safe place
         if (isSafePlace) break;
-        
+
     }
 };
 
 Ghost.prototype.getBestMove = function() {
-    // AI pælingar random sammt ekki random eftir leveli ? 
+    // AI pælingar random sammt ekki random eftir leveli ?
     var snakePos = entityManager.getSnakePos();
-    
+
     var bestX = snakePos.cx - this.cx;
     var bestY = snakePos.cy - this.cy;
 
@@ -155,7 +155,7 @@ Ghost.prototype.getBestMove = function() {
 
 Ghost.prototype.getWorstMove = function() {
     var snakePos1 = entityManager.getSnakePos();
-    
+
     var worstX = snakePos1.cx - this.cx;
     var worstY = snakePos1.cy - this.cy;
 
@@ -194,11 +194,11 @@ Ghost.prototype.getRandomMove = function() {
     }
 
 }
-    
+
 Ghost.prototype.update = function (du) {
 
     spatialManager.unregister(this);
-    
+
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
@@ -233,9 +233,9 @@ Ghost.prototype.update = function (du) {
             }
         this.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
         }
-    }  
+    }
     this.wrapPosition();
-    
+
     if(Level.checkCollisionGhost((this.cx + this.velX * du), (this.cy + this.velY * du))){
         this.cx -= this.velX * du;
         this.cy -= this.velY * du;
@@ -243,10 +243,8 @@ Ghost.prototype.update = function (du) {
         this.cx += this.velX * du;
         this.cy += this.velY * du;
     }
-    
-    
-    
-        
+
+
 
     spatialManager.register(this);
 
@@ -258,6 +256,7 @@ Ghost.prototype.getRadius = function () {
 };
 
 Ghost.prototype.eat = function () {
+    game_score.add_score(20);
     this.kill();
 };
 
@@ -273,7 +272,7 @@ Ghost.prototype.respawn = function(){
     this.isEdible = false;
     this.hasRespawned = true;
     this.resurrect();
-    entityManager.resurrectGhost(this)
+    entityManager.resurrectGhost(this);
 }
 
 Ghost.prototype.render = function (ctx) {
