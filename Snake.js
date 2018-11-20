@@ -63,7 +63,7 @@ Snake.prototype.update = function (du) {
     var stig = game_score.get_score();
 
     if(stig > this.num){
-        this.speed *= 1.2;
+        this.speed += 0.2;
         this.num += 50;
     }
    
