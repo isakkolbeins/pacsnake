@@ -45,10 +45,27 @@ function createBeginningSnake() {
 //=========================
 
 function createFood(){
-    entityManager.generateFood(new Food({cx:60,cy:60}));
-    entityManager.generateFood(new Food({cx:740,cy:60}));
-    entityManager.generateFood(new Food({cx:60,cy:740}));
-    entityManager.generateFood(new Food({cx:740,cy:740}));
+
+    var x =60;
+    var y =60;
+
+    for(var i=0;i<18;i++){
+        for(var j=0;j<18;j++){
+        
+            if(i===0 || i==1){
+              entityManager.generateFood(new Food({cx:x,cy:y}));  
+            }
+            else if(j===0||j==1){
+              entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+           
+        x += 40; 
+        }
+        x = 60;
+        y += 40;
+    }
+    
+    
 }
 
 
