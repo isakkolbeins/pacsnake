@@ -39,10 +39,15 @@ Snake.prototype.isHead = true;
 Snake.prototype.scale = 1;
 Snake.prototype.num = 50;
 
-Snake.prototype.KEY_UP = 'W'.charCodeAt(0);
-Snake.prototype.KEY_DOWN  = 'S'.charCodeAt(0);
-Snake.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
-Snake.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
+Snake.prototype.KEY_UP       = 'W'.charCodeAt(0);
+Snake.prototype.KEY_DOWN     = 'S'.charCodeAt(0);
+Snake.prototype.KEY_LEFT     = 'A'.charCodeAt(0);
+Snake.prototype.KEY_RIGHT    = 'D'.charCodeAt(0);
+
+Snake.prototype.ARROW_LEFT   = 37;
+Snake.prototype.ARROW_UP     = 38;
+Snake.prototype.ARROW_RIGHT  = 39;
+Snake.prototype.ARROW_DOWN   = 40;
 
 var powerUpEaten = false; 
 
@@ -90,25 +95,25 @@ Snake.prototype.update = function (du) {
 
 Snake.prototype.calculateDirection = function () {
 
-    if (keys[this.KEY_UP] && this.direction != 'D'){
+    if ((keys[this.KEY_UP] || keys[this.ARROW_UP]) && this.direction != 'D'){
         this.velX = 0;
         this.velY = -1*this.speed;
         this.direction = 'U';
         this.rotation = -Math.PI/2;
     }
-    if (keys[this.KEY_DOWN] && this.direction != 'U'){
+    if ((keys[this.KEY_DOWN] || keys[this.ARROW_DOWN]) && this.direction != 'U'){
         this.velX = 0;
         this.velY = this.speed; 
         this.direction = 'D';
         this.rotation = Math.PI/2;
     }  
-    if (keys[this.KEY_LEFT] && this.direction != 'R'){
+    if ((keys[this.KEY_LEFT] || keys[this.ARROW_LEFT]) && this.direction != 'R'){
         this.velX = -1*this.speed;
         this.velY = 0; 
         this.direction = 'L';
         this.rotation = 0;
     }  
-    if (keys[this.KEY_RIGHT] && this.direction != 'L'){
+    if ((keys[this.KEY_RIGHT] || keys[this.ARROW_RIGHT]) && this.direction != 'L'){
         this.velX = this.speed;
         this.velY = 0; 
         this.direction = 'R';
