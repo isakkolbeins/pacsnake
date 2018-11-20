@@ -290,6 +290,10 @@ render: function(ctx) {
     }
 
     game_score.show_score(ctx);
+
+    if(g_isUpdatePaused){
+        pause.paused(ctx);
+    }
 }
 
 }

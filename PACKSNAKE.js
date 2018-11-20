@@ -32,10 +32,10 @@ var g_ctx = g_canvas.getContext("2d");
 function createBeginningSnake() {
 
     entityManager.generateSnake({
-        cx : 100,
-        cy : 100,
-        length : 2,
-        direction : 'R',
+        cx: 100,
+        cy: 100,
+        length: 2,
+        direction: 'R',
     });
 
 }
@@ -44,35 +44,35 @@ function createBeginningSnake() {
 // CREATE FOOD
 //=========================
 
-function createFood(){
+function createFood() {
 
-    var x =60;
-    var y =60;
+    var x = 60;
+    var y = 60;
 
-    for(var i=0;i<18;i++){
-        for(var j=0;j<18;j++){
+    for (var i = 0; i < 18; i++) {
+        for (var j = 0; j < 18; j++) {
 
-            if((i < 2)||(i>15)){
-              entityManager.generateFood(new Food({cx:x,cy:y}));
+            if ((i < 2) || (i > 15)) {
+                entityManager.generateFood(new Food({ cx: x, cy: y }));
             }
-            else if((j<2)||(j>15)){
-              entityManager.generateFood(new Food({cx:x,cy:y}));
+            else if ((j < 2) || (j > 15)) {
+                entityManager.generateFood(new Food({ cx: x, cy: y }));
             }
-            else if(((i===5)||(i===6))&&((j>3)&&(j<14))){
-              entityManager.generateFood(new Food({cx:x,cy:y}));
+            else if (((i === 5) || (i === 6)) && ((j > 3) && (j < 14))) {
+                entityManager.generateFood(new Food({ cx: x, cy: y }));
             }
-            else if(((i===11)||(i===12))&&((j>3)&&(j<14))){
-                entityManager.generateFood(new Food({cx:x,cy:y}));
+            else if (((i === 11) || (i === 12)) && ((j > 3) && (j < 14))) {
+                entityManager.generateFood(new Food({ cx: x, cy: y }));
             }
-            else if(((j===4)||(j===5))&&((i>=5)&&(i<=12))){
-                entityManager.generateFood(new Food({cx:x,cy:y}));
+            else if (((j === 4) || (j === 5)) && ((i >= 5) && (i <= 12))) {
+                entityManager.generateFood(new Food({ cx: x, cy: y }));
             }
-            else if(((j===12)||(j===13))&&((i>=5)&&(i<=12))){
-                entityManager.generateFood(new Food({cx:x,cy:y}));
+            else if (((j === 12) || (j === 13)) && ((i >= 5) && (i <= 12))) {
+                entityManager.generateFood(new Food({ cx: x, cy: y }));
             }
 
 
-        x += 40;
+            x += 40;
         }
         x = 60;
         y += 40;
@@ -87,25 +87,39 @@ function createFood(){
 //=========================
 
 var game_score = {
-    score : 0,
+    score: 0,
 
-add_score : function(num){
-    this.score = this.score + num;
-},
+    add_score: function (num) {
+        this.score = this.score + num;
+    },
 
-get_score : function(){
-    return this.score;
-},
+    get_score: function () {
+        return this.score;
+    },
 
-show_score : function(ctx){
-    ctx.save();
-    ctx.fillStyle="white";
-    ctx.font="bold 20px Arial";
-    var text = "Score: " + this.score;
-    ctx.fillText(text,350, 20);
-    ctx.restore();
+    show_score: function (ctx) {
+        ctx.save();
+        ctx.fillStyle = "white";
+        ctx.font = "bold 20px Arial";
+        var text = "Score: " + this.score;
+        ctx.fillText(text, 350, 20);
+        ctx.restore();
+    }
 }
+
+var pause = {
+
+    paused: function (ctx) {
+        ctx.font = "bold 24px Arial";
+        var msg = "There is NO";
+        var msg1 = "pausing in";
+        var msg2 = "real life!!";
+        ctx.fillText(msg, 332, 380);
+        ctx.fillText(msg1, 332, 405);
+        ctx.fillText(msg2, 332, 430);
+    }
 }
+
 
 
 
@@ -148,7 +162,7 @@ function updateSimulation(du) {
 var g_renderSpatialDebug = false;
 var KEY_SPATIAL = keyCode('X');
 var g_isPaused = false;
-var KEY_PAUSE   = keyCode('P');;
+var KEY_PAUSE = keyCode('P');;
 
 /*
 var g_useGravity = false;
@@ -170,22 +184,22 @@ function processDiagnostics() {
 
     if (eatKey(KEY_PAUSE)) g_isPaused = !g_isPaused;
     if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
-/*
-    if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
-    if (eatKey(KEY_HALT)) entityManager.haltShips();
-    if (eatKey(KEY_RESET)) entityManager.resetShips();
-    if (eatKey(KEY_0)) entityManager.toggleRocks();
-    if (eatKey(KEY_1)) entityManager.generateShip({
-        cx : g_mouseX,
-        cy : g_mouseY,
-        sprite : g_sprites.ship});
-    if (eatKey(KEY_2)) entityManager.generateShip({
-        cx : g_mouseX,
-        cy : g_mouseY,
-        sprite : g_sprites.ship2
-        });
-    if (eatKey(KEY_K)) entityManager.killNearestShip(
-        g_mouseX, g_mouseY); */
+    /*
+        if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
+        if (eatKey(KEY_HALT)) entityManager.haltShips();
+        if (eatKey(KEY_RESET)) entityManager.resetShips();
+        if (eatKey(KEY_0)) entityManager.toggleRocks();
+        if (eatKey(KEY_1)) entityManager.generateShip({
+            cx : g_mouseX,
+            cy : g_mouseY,
+            sprite : g_sprites.ship});
+        if (eatKey(KEY_2)) entityManager.generateShip({
+            cx : g_mouseX,
+            cy : g_mouseY,
+            sprite : g_sprites.ship2
+            });
+        if (eatKey(KEY_K)) entityManager.killNearestShip(
+            g_mouseX, g_mouseY); */
 }
 
 
@@ -220,118 +234,118 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        levelBackground : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/backgroundvol2.png",
+        levelBackground: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/backgroundvol2.png",
 
-        ghostBlue       : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
-        ghostRed        : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostRead.png",
-        ghostPink       : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostPink.png",
-        ghostOrange     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostOrange.png",
-        ghostEdible     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostEdible.png",
+        ghostBlue: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
+        ghostRed: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostRead.png",
+        ghostPink: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostPink.png",
+        ghostOrange: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostOrange.png",
+        ghostEdible: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostEdible.png",
 
-        snakeBoddy      : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddy.png",
-        snakeBoddyBlue  : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddyBlue.png",
+        snakeBoddy: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddy.png",
+        snakeBoddyBlue: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddyBlue.png",
 
-        snakeHead0L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead0.png",
-        snakeHead1L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead1.png",
-        snakeHead2L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead2.png",
-        snakeHead3L     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead3.png",
+        snakeHead0L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead0.png",
+        snakeHead1L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead1.png",
+        snakeHead2L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead2.png",
+        snakeHead3L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHead3.png",
 
-        snakeHead0R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR0.png",
-        snakeHead1R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR1.png",
-        snakeHead2R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR2.png",
-        snakeHead3R     : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR3.png",
+        snakeHead0R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR0.png",
+        snakeHead1R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR1.png",
+        snakeHead2R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR2.png",
+        snakeHead3R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadR3.png",
 
-        snakeHeadBlue0L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue0.png",
-        snakeHeadBlue1L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue1.png",
-        snakeHeadBlue2L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue2.png",
-        snakeHeadBlue3L : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue3.png",
+        snakeHeadBlue0L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue0.png",
+        snakeHeadBlue1L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue1.png",
+        snakeHeadBlue2L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue2.png",
+        snakeHeadBlue3L: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadBlue3.png",
 
-        snakeHeadBlue0R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR0.png",
-        snakeHeadBlue1R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR1.png",
-        snakeHeadBlue2R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR2.png",
-        snakeHeadBlue3R : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR3.png",
+        snakeHeadBlue0R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR0.png",
+        snakeHeadBlue1R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR1.png",
+        snakeHeadBlue2R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR2.png",
+        snakeHeadBlue3R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR3.png",
 
-        gameOver00 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver00.png",
-        gameOver01 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver01.png",
-        gameOver02 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver02.png",
-        gameOver03 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver03.png",
-        gameOver04 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver04.png",
-        gameOver05 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver05.png",
-        gameOver06 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver06.png",
-        gameOver07 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver07.png",
-        gameOver08 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver08.png",
-        gameOver09 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver09.png",
-        gameOver10 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver10.png",
-        gameOver11 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver11.png",
-        gameOver12 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver12.png",
-        gameOver13 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver13.png",
-        gameOver14 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver14.png",
-        gameOver15 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver15.png",
-        gameOver16 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver16.png",
-        gameOver17 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver17.png",
-        gameOver18 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver18.png",
-        gameOver19 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver19.png",
-        gameOver20 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver20.png",
-        gameOver21 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver21.png",
-        gameOver22 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver22.png",
-        gameOver23 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver23.png",
-        gameOver24 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver24.png",
-        gameOver25 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver25.png",
-        gameOver26 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver26.png",
-        gameOver27 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver27.png",
-        gameOver28 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver28.png",
-        gameOver29 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver29.png",
-        gameOver30 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver30.png",
-        gameOver31 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver31.png",
-        gameOver32 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver32.png",
-        gameOver33 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver33.png",
-        gameOver34 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver34.png",
-        gameOver35 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver35.png",
-        gameOver36 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver36.png",
-        gameOver37 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver37.png",
-        gameOver38 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver38.png",
-        gameOver39 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver39.png",
-        gameOver40 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver40.png",
-        gameOver41 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver41.png",
-        gameOver42 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver42.png",
-        gameOver43 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver43.png",
-        gameOver44 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver44.png",
-        gameOver45 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver45.png",
-        gameOver46 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver46.png",
-        gameOver47 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver47.png",
-        gameOver48 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver48.png",
-        gameOver49 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver49.png",
-        gameOver50 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver50.png",
-        gameOver51 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver51.png",
-        gameOver52 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver52.png",
-        gameOver53 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver53.png",
-        gameOver54 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver54.png",
-        gameOver55 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver55.png",
-        gameOver56 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver56.png",
-        gameOver57 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver57.png",
-        gameOver58 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver58.png",
-        gameOver59 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver59.png",
-        gameOver60 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver60.png",
-        gameOver61 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver61.png",
-        gameOver62 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver62.png",
-        gameOver63 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver63.png",
-        gameOver64 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver64.png",
-        gameOver65 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver65.png",
-        gameOver66 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver66.png",
-        gameOver67 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver67.png",
-        gameOver68 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver68.png",
-        gameOver69 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver69.png",
-        gameOver70 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver70.png",
-        gameOver71 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver71.png",
-        gameOver72 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver72.png",
-        gameOver73 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver73.png",
-        gameOver74 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver74.png",
-        gameOver75 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver75.png",
-        gameOver76 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver76.png",
-        gameOver77 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver77.png",
-        gameOver78 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver78.png",
-        gameOver79 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver79.png",
-        gameOver80 : "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver00.png"
+        gameOver00: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver00.png",
+        gameOver01: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver01.png",
+        gameOver02: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver02.png",
+        gameOver03: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver03.png",
+        gameOver04: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver04.png",
+        gameOver05: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver05.png",
+        gameOver06: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver06.png",
+        gameOver07: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver07.png",
+        gameOver08: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver08.png",
+        gameOver09: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver09.png",
+        gameOver10: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver10.png",
+        gameOver11: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver11.png",
+        gameOver12: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver12.png",
+        gameOver13: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver13.png",
+        gameOver14: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver14.png",
+        gameOver15: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver15.png",
+        gameOver16: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver16.png",
+        gameOver17: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver17.png",
+        gameOver18: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver18.png",
+        gameOver19: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver19.png",
+        gameOver20: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver20.png",
+        gameOver21: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver21.png",
+        gameOver22: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver22.png",
+        gameOver23: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver23.png",
+        gameOver24: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver24.png",
+        gameOver25: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver25.png",
+        gameOver26: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver26.png",
+        gameOver27: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver27.png",
+        gameOver28: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver28.png",
+        gameOver29: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver29.png",
+        gameOver30: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver30.png",
+        gameOver31: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver31.png",
+        gameOver32: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver32.png",
+        gameOver33: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver33.png",
+        gameOver34: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver34.png",
+        gameOver35: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver35.png",
+        gameOver36: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver36.png",
+        gameOver37: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver37.png",
+        gameOver38: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver38.png",
+        gameOver39: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver39.png",
+        gameOver40: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver40.png",
+        gameOver41: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver41.png",
+        gameOver42: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver42.png",
+        gameOver43: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver43.png",
+        gameOver44: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver44.png",
+        gameOver45: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver45.png",
+        gameOver46: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver46.png",
+        gameOver47: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver47.png",
+        gameOver48: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver48.png",
+        gameOver49: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver49.png",
+        gameOver50: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver50.png",
+        gameOver51: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver51.png",
+        gameOver52: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver52.png",
+        gameOver53: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver53.png",
+        gameOver54: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver54.png",
+        gameOver55: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver55.png",
+        gameOver56: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver56.png",
+        gameOver57: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver57.png",
+        gameOver58: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver58.png",
+        gameOver59: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver59.png",
+        gameOver60: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver60.png",
+        gameOver61: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver61.png",
+        gameOver62: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver62.png",
+        gameOver63: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver63.png",
+        gameOver64: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver64.png",
+        gameOver65: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver65.png",
+        gameOver66: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver66.png",
+        gameOver67: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver67.png",
+        gameOver68: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver68.png",
+        gameOver69: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver69.png",
+        gameOver70: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver70.png",
+        gameOver71: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver71.png",
+        gameOver72: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver72.png",
+        gameOver73: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver73.png",
+        gameOver74: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver74.png",
+        gameOver75: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver75.png",
+        gameOver76: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver76.png",
+        gameOver77: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver77.png",
+        gameOver78: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver78.png",
+        gameOver79: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver79.png",
+        gameOver80: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver00.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -341,34 +355,34 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.ghostBlue     = new Sprite([g_images.ghostBlue]);
-    g_sprites.ghostRed      = new Sprite([g_images.ghostRed]);
-    g_sprites.ghostOrange   = new Sprite([g_images.ghostOrange]);
-    g_sprites.ghostPink     = new Sprite([g_images.ghostPink]);
-    g_sprites.ghostEdible   = new Sprite([g_images.ghostEdible]);
+    g_sprites.ghostBlue = new Sprite([g_images.ghostBlue]);
+    g_sprites.ghostRed = new Sprite([g_images.ghostRed]);
+    g_sprites.ghostOrange = new Sprite([g_images.ghostOrange]);
+    g_sprites.ghostPink = new Sprite([g_images.ghostPink]);
+    g_sprites.ghostEdible = new Sprite([g_images.ghostEdible]);
 
-    g_sprites.snakeBoddy    = new Sprite([g_images.snakeBoddy]);
-    g_sprites.snakeBoddyBlue= new Sprite([g_images.snakeBoddyBlue]);
+    g_sprites.snakeBoddy = new Sprite([g_images.snakeBoddy]);
+    g_sprites.snakeBoddyBlue = new Sprite([g_images.snakeBoddyBlue]);
 
-    g_sprites.snakeHeadL     = new Sprite([ g_images.snakeHead0L,
-                                            g_images.snakeHead1L,
-                                            g_images.snakeHead2L,
-                                            g_images.snakeHead3L]);
+    g_sprites.snakeHeadL = new Sprite([g_images.snakeHead0L,
+    g_images.snakeHead1L,
+    g_images.snakeHead2L,
+    g_images.snakeHead3L]);
 
-    g_sprites.snakeHeadR     = new Sprite([ g_images.snakeHead0R,
-                                            g_images.snakeHead1R,
-                                            g_images.snakeHead2R,
-                                            g_images.snakeHead3R]);
+    g_sprites.snakeHeadR = new Sprite([g_images.snakeHead0R,
+    g_images.snakeHead1R,
+    g_images.snakeHead2R,
+    g_images.snakeHead3R]);
 
-    g_sprites.snakeHeadBlueL = new Sprite([ g_images.snakeHeadBlue0L,
-                                            g_images.snakeHeadBlue1L,
-                                            g_images.snakeHeadBlue2L,
-                                            g_images.snakeHeadBlue3L]);
+    g_sprites.snakeHeadBlueL = new Sprite([g_images.snakeHeadBlue0L,
+    g_images.snakeHeadBlue1L,
+    g_images.snakeHeadBlue2L,
+    g_images.snakeHeadBlue3L]);
 
-    g_sprites.snakeHeadBlueR = new Sprite([  g_images.snakeHeadBlue0R,
-                                            g_images.snakeHeadBlue1R,
-                                            g_images.snakeHeadBlue2R,
-                                            g_images.snakeHeadBlue3R]);
+    g_sprites.snakeHeadBlueR = new Sprite([g_images.snakeHeadBlue0R,
+    g_images.snakeHeadBlue1R,
+    g_images.snakeHeadBlue2R,
+    g_images.snakeHeadBlue3R]);
 
     entityManager.init();
     createBeginningSnake();
@@ -382,8 +396,8 @@ requestPreloads();
 
 var g_canDie = false;
 
-function canDie(){
+function canDie() {
     g_canDie = true;
 }
 
-setTimeout(canDie,3000);
+setTimeout(canDie, 3000);
