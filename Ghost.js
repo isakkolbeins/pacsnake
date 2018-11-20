@@ -17,8 +17,12 @@ function Ghost(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
+
+    //speed ratio
     this.speed = 1;
-    this.num = 0;
+
+    //number
+    this.num = 50;
 
     this.randomisePosition();
 
@@ -216,7 +220,7 @@ Ghost.prototype.update = function (du) {
 
     var stig = game_score.get_score();
 
-    if(stig > this.num + 50){
+    if(stig > this.num){
         this.speed *= 1.2;
         this.num += 50;
     }
@@ -263,7 +267,7 @@ Ghost.prototype.update = function (du) {
     }
     this.wrapPosition();
 
-    if (Level.checkCollisionGhost((this.cx + this.velX * du), (this.cy + this.velY * du))) {
+    if (Level.checkCollisionGhost((this.cx + this.velX * this.speed * du), (this.cy + this.velY * this.speed * du))) {
 
         //chooses a random number -1 or 1
         var random = 1;
