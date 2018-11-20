@@ -104,6 +104,21 @@ Ghost.prototype.rotation = 0;
 //Ghost.prototype.velY = 1;
 
 
+/*
+Ghost.prototype.getSnake = function(){
+    var hitEntitys = spatialManager.findEntityInRange(this.cx,this.cy,10);
+
+    hitEntitys.forEach(hitEntity => {
+        if(!hitEntity.isBlue){
+            hitEntity.kill();
+            g_isUpdatePaused = true;
+
+        }
+    });
+}
+*/
+
+
 Ghost.prototype._moveToASafePlace = function () {
 
     // Move to a safe place some suitable distance away
