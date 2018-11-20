@@ -24,6 +24,8 @@ function Tail(descr) {
     this.isWaiting = true;
     this.isBlue = false;
     this.isTail = true;
+    console.log("this can kill you: " + this.canItKill);
+    
     // this.cx = this.cx-10;
 
 };

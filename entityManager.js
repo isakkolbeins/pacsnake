@@ -122,13 +122,20 @@ generateTail : function(follow) {
     var delay = 0;// this._tail.length;
     var delayMax = this._tail.length;
 
+    var itCanKill = true;
+
+    if(this._tail.length <5){
+        itCanKill = false;
+    }
+  
     var descr = {   follow : follow,
         cx : follow.cx,
         cy : follow.cy,
         direction : follow.direction,
         delay : delay,
+        canItKill: itCanKill,
         delayMax : delayMax};
-
+    console.log(this._tail.length +"=====================================================" );
     this._tail.push(new Tail(descr));
 },
 
