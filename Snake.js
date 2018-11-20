@@ -132,10 +132,14 @@ Snake.prototype.eatSelf = function(){
     }
 
 
-    if(tailhits.length > 3){
+    if(tailhits.length > 4){
         tailhits.forEach(hitEntity => {
-            if(hitEntity.isTail){
+            if(g_canDie){
                 console.log("should die!!");
+                
+                this.kill();
+                g_isUpdatePaused=true;
+
             }
         });
 

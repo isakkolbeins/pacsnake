@@ -36,6 +36,8 @@ _powerup : [],
 _food : [],
 _bShowRocks : true,
 
+
+
 // "PRIVATE" METHODS
 
 _generateGhosts : function() {
@@ -101,6 +103,8 @@ init: function() {
     this.generatePowerUp();
 
 },
+
+
 
 
 generateSnake : function(descr) {
@@ -285,3 +289,4 @@ render: function(ctx) {
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
+

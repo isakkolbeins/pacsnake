@@ -297,3 +297,11 @@ function preloadDone() {
 
 // Kick it off
 requestPreloads();
+
+var g_canDie = false;
+
+function canDie(){
+    g_canDie = true;
+}
+
+setTimeout(canDie,3000);
