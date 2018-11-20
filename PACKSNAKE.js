@@ -113,10 +113,10 @@ var pause = {
         ctx.font = "bold 24px Arial";
         var msg = "There is NO";
         var msg1 = "pausing in";
-        var msg2 = "real life!!";
+        var msg2 = "REAL LIFE!!";
         ctx.fillText(msg, 332, 380);
-        ctx.fillText(msg1, 332, 405);
-        ctx.fillText(msg2, 332, 430);
+        ctx.fillText(msg1, 340, 405);
+        ctx.fillText(msg2, 332, 435);
     }
 }
 
