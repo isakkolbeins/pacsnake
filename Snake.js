@@ -37,6 +37,7 @@ Snake.prototype.direction = 'R';
 Snake.prototype.isBlue = false;
 Snake.prototype.isHead = true;
 Snake.prototype.scale = 1;
+Snake.prototype.num = 50;
 
 Snake.prototype.KEY_UP       = 'W'.charCodeAt(0);
 Snake.prototype.KEY_DOWN     = 'S'.charCodeAt(0);
@@ -57,6 +58,13 @@ Snake.prototype.update = function (du) {
 
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
+    }
+
+    var stig = game_score.get_score();
+
+    if(stig > this.num){
+        this.speed *= 1.2;
+        this.num += 20;
     }
    
     this.calculateDirection();

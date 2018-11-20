@@ -25,7 +25,8 @@ function Tail(descr) {
     this.isBlue = false;
     this.isTail = true;
     console.log("this can kill you: " + this.canItKill);
-    
+    this.decDelay = 1.4;
+    this.num = 50;
     // this.cx = this.cx-10;
 
 };
@@ -97,8 +98,16 @@ Tail.prototype.update = function (du) {
     }
     
     if(this.isWaiting){
-        this.delay -= 1.4;
+        this.delay -= this.decDelay*1;
     }
+
+    var stig = game_score.get_score();
+
+    if(stig > this.num){
+        this.decDelay *= 1.05;
+        this.num += 20;
+    }
+
 
 
     if (this.delay < 0) {
