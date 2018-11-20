@@ -133,6 +133,10 @@ Snake.prototype.eatPowerUp = function () {
                 powerUpEaten = true;
                 edible.call(hitEntity);
             }
+            else if(hitEntity.canBeEaten){
+                game_score.add_score(1);
+                hitEntity.eat();
+            }
         });   
     }
 };

@@ -40,6 +40,81 @@ function createBeginningSnake() {
 
 }
 
+//========================
+// CREATE FOOD
+//=========================
+
+function createFood(){
+
+    var x =60;
+    var y =60;
+
+    for(var i=0;i<18;i++){
+        for(var j=0;j<18;j++){
+        
+            if((i < 2)||(i>15)){
+              entityManager.generateFood(new Food({cx:x,cy:y}));  
+            }
+            else if((j<2)||(j>15)){
+              entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            else if(((i===5)||(i===6))&&((j>3)&&(j<14))){
+              entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            else if(((i===11)||(i===12))&&((j>3)&&(j<14))){
+                entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            else if(((j===4)||(j===5))&&((i>=5)&&(i<=12))){
+                entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            else if(((j===12)||(j===13))&&((i>=5)&&(i<=12))){
+                entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            
+           
+        x += 40; 
+        }
+        x = 60;
+        y += 40;
+    }
+    
+    
+}
+
+
+//=========================
+// SHOW SCORE
+//=========================
+
+var game_score = {
+    score : 0,
+
+add_score : function(num){
+    this.score = this.score + num;
+},
+
+show_score : function(ctx){
+    ctx.save();
+    ctx.fillStyle="white";
+    ctx.font="bold 20px Arial";
+    var text = "Score: " + this.score;
+    ctx.fillText(text,350, 20);
+    ctx.restore();
+
+
+    const div = document.createElement("div");
+    const score = document.createTextNode("score:" + this.score);
+
+    div.appendChild(score);
+
+
+}
+}
+
+
+ 
+
+
 // =============
 // GATHER INPUTS
 // =============
@@ -219,6 +294,7 @@ function preloadDone() {
 
     entityManager.init();
     createBeginningSnake();
+    createFood();
 
     main.init();
 }

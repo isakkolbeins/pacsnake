@@ -99,7 +99,9 @@ init: function() {
     this._generateGhosts();
     //this._generateShip();
     this.generatePowerUp();
+   
 },
+
 
 generateSnake : function(descr) {
     this._snake.push(new Snake(descr));
@@ -147,11 +149,9 @@ getSnakeIsBlue : function() {
     return this._snake[0].isBlue;
 },
 
-generateFood : function(){
-    this._food.push(new Food({cx:20,cy:20}));
+generateFood : function(food){
+    this._food.push(food);
 },
-
-
 
 
 
@@ -259,6 +259,8 @@ render: function(ctx) {
     }
         debugY += 10;
     }
+
+    game_score.show_score(ctx);
 }
 
 }
