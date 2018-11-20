@@ -45,11 +45,38 @@ function createBeginningSnake() {
 //=========================
 
 function createFood(){
-    entityManager.generateFood({cx:60,cy:60});
-    entityManager.generateFood({cx:80,cy:60});
-    entityManager.generateFood({cx:100,cy:60});
-    entityManager.generateFood({cx:120,cy:60});
+    entityManager.generateFood(new Food({cx:60,cy:60}));
+    entityManager.generateFood(new Food({cx:740,cy:60}));
+    entityManager.generateFood(new Food({cx:60,cy:740}));
+    entityManager.generateFood(new Food({cx:740,cy:740}));
 }
+
+
+//=========================
+// SHOW SCORE
+//=========================
+
+var game_score = {
+    score : 0,
+
+add_score : function(num){
+    this.score = this.score + num;
+},
+
+show_score : function(ctx){
+    ctx.save();
+    ctx.fillStyle="white";
+    ctx.font="bold 20px Arial";
+    var text = "Score: " + this.score;
+    ctx.fillText(text,350, 20);
+    ctx.restore();
+
+}
+}
+
+
+ 
+
 
 // =============
 // GATHER INPUTS

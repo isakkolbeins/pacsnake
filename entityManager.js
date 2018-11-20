@@ -102,6 +102,7 @@ init: function() {
    
 },
 
+
 generateSnake : function(descr) {
     this._snake.push(new Snake(descr));
     this.generateTail(this._snake[0]);
@@ -148,11 +149,9 @@ getSnakeIsBlue : function() {
     return this._snake[0].isBlue;
 },
 
-generateFood : function(descr){
-    this._food.push(new Food(descr));
+generateFood : function(food){
+    this._food.push(food);
 },
-
-
 
 
 
@@ -260,6 +259,8 @@ render: function(ctx) {
     }
         debugY += 10;
     }
+
+    game_score.show_score(ctx);
 }
 
 }
