@@ -17,6 +17,8 @@ function Ghost(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
+    this.speed = 1;
+    this.num = 0;
 
     this.randomisePosition();
 
@@ -212,13 +214,11 @@ Ghost.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
-    var speed = 1;
-    var num = 0;
     var stig = game_score.get_score();
 
-    if(stig > num + 50){
-        speed *= 1.2;
-        num += 50;
+    if(stig > this.num + 50){
+        this.speed *= 1.2;
+        this.num += 50;
     }
 
     //checking if the ghost is dead
@@ -286,8 +286,8 @@ Ghost.prototype.update = function (du) {
             this.velY = 0;
         }
     } else {
-        this.cx += this.velX * speed * du;
-        this.cy += this.velY * speed * du;
+        this.cx += this.velX * this.speed * du;
+        this.cy += this.velY * this.speed * du;
     }
 
     spatialManager.register(this);
