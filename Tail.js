@@ -97,7 +97,7 @@ Tail.prototype.update = function (du) {
     }
     
     if(this.isWaiting){
-        this.delay -= du;
+        this.delay -= 1.4;
     }
 
 
