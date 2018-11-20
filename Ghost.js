@@ -218,7 +218,7 @@ Ghost.prototype.update = function (du) {
 
     if(stig > this.num + 50){
         this.speed *= 1.2;
-        this.num += 50;
+        this.num += 20;
     }
 
     //checking if the ghost is dead
