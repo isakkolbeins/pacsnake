@@ -120,6 +120,20 @@ Snake.prototype.eatFood = function () {
     // add to length and count points 
 };
 
+Snake.prototype.eatSelf = function(){
+    var hitEntitys = this.findHitEntity();
+
+    if(hitEntitys.length > 0){
+        hitEntitys.forEach(hitEntity => {
+            if(hitEntity.isTail){
+                console.log("should die!!");
+            }
+        });
+
+    }
+}
+
+
 Snake.prototype.eatPowerUp = function () {
     // Set snake, tail and ghosts to blue 
     // Make ghosts edible

@@ -23,6 +23,7 @@ function Tail(descr) {
     this.scale  = this.scale  || 1;
     this.isWaiting = true;
     this.isBlue = false;
+    this.isTail = true;
     // this.cx = this.cx-10;
 
 };

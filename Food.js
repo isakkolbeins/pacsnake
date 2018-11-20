@@ -7,7 +7,7 @@ function Food(descr){
     this.rememberResets();
 
     
-    this.scale = 0.3;
+    this.scale = 0.4;
     this._isWarping = false;
 
     this.canBeEaten = true;
@@ -37,7 +37,8 @@ Food.prototype.reset = function(){
 Food.prototype.eat = function(){
     this.kill();
 
-    setTimeout(this.respawn_food.bind(this),3000);
+    setTimeout(this.respawn_food.bind(this),60000);
+    
 };
 
 Food.prototype.update = function(){
@@ -66,7 +67,6 @@ Food.prototype.render = function(ctx){
 };
 
 Food.prototype.respawn_food = function(){
-
-    this.resurrect();
-    entityManager.generateFood(this);
+        this.resurrect();
+        entityManager.generateFood(this); 
 }

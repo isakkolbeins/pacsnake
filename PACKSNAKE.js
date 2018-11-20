@@ -100,14 +100,6 @@ show_score : function(ctx){
     var text = "Score: " + this.score;
     ctx.fillText(text,350, 20);
     ctx.restore();
-
-
-    const div = document.createElement("div");
-    const score = document.createTextNode("score:" + this.score);
-
-    div.appendChild(score);
-
-
 }
 }
 
