@@ -35,6 +35,7 @@ Snake.prototype.velY = 0;
 Snake.prototype.length = 3;
 Snake.prototype.direction = 'R';
 Snake.prototype.isBlue = false;
+Snake.prototype.isHead = true;
 Snake.prototype.scale = 1;
 
 Snake.prototype.KEY_UP = 'W'.charCodeAt(0);

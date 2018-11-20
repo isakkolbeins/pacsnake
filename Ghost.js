@@ -104,19 +104,19 @@ Ghost.prototype.rotation = 0;
 //Ghost.prototype.velY = 1;
 
 
-/*
+
 Ghost.prototype.getSnake = function(){
     var hitEntitys = spatialManager.findEntityInRange(this.cx,this.cy,10);
 
     hitEntitys.forEach(hitEntity => {
-        if(!hitEntity.isBlue){
+        if(!hitEntity.isBlue && hitEntity.isHead){
             hitEntity.kill();
+            console.log("killed by ghost");
             g_isUpdatePaused = true;
-
         }
     });
 }
-*/
+
 
 
 Ghost.prototype._moveToASafePlace = function () {
@@ -230,6 +230,7 @@ Ghost.prototype.update = function (du) {
         this.sprite = this.reset_sprite;
     }
 
+    this.getSnake();
     if(this.delay < 0){
         if(this.isEdible){
             /// ATH ---- skoða eh skrítið
