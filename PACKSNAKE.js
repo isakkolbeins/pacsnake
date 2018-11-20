@@ -93,6 +93,10 @@ add_score : function(num){
     this.score = this.score + num;
 },
 
+get_score : function(){
+    return this.score;
+},
+
 show_score : function(ctx){
     ctx.save();
     ctx.fillStyle="white";
@@ -106,8 +110,6 @@ show_score : function(ctx){
     const score = document.createTextNode("score:" + this.score);
 
     div.appendChild(score);
-
-
 }
 }
 
