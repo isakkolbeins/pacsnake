@@ -17,7 +17,7 @@ with suitable 'data' and 'methods'.
 
 
 // Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops 
+// my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
@@ -44,7 +44,7 @@ _generateGhosts : function() {
 
     for (i = 0; i < ghostCount; ++i) {
         this.generateGhost({color:i});
-        
+
     }
 },
 
@@ -59,7 +59,7 @@ _findNearestShip : function(posX, posY) {
         var thisShip = this._ships[i];
         var shipPos = thisShip.getPos();
         var distSq = util.wrappedDistSq(
-            shipPos.posX, shipPos.posY, 
+            shipPos.posX, shipPos.posY,
             posX, posY,
             g_canvas.width, g_canvas.height);
 
@@ -99,7 +99,7 @@ init: function() {
     this._generateGhosts();
     //this._generateShip();
     this.generatePowerUp();
-   
+
 },
 
 
@@ -135,6 +135,9 @@ resurrectGhost : function(ghost) {
 
 generatePowerUp : function(descr) {
     this._powerup.push(new PowerUp(descr));
+    for (var i = 0; i < this._ghosts.length; i++) {
+        this._ghosts[i].hasRespawned = false;
+    }
 },
 
 getSnakePos : function() {
@@ -197,7 +200,7 @@ resetShips: function() {
 
 haltShips: function() {
     this._forEachOf(this._ships, Ship.prototype.halt);
-},	
+},
 
 toggleRocks: function() {
     this._bShowRocks = !this._bShowRocks;
@@ -230,9 +233,9 @@ update: function(du) {
             }
         }
     }
-    
 
-    
+
+
 },
 
 render: function(ctx) {
@@ -241,14 +244,14 @@ render: function(ctx) {
     for (var c = 0; c < this._categories.length; ++c) {
 
         var aCategory = this._categories[c];
-        
+
         // Ef tail byrja aftast að rendera looks better
         if (aCategory === this._tail){
             for (var i = aCategory.length-1; i >=0 ; --i) {
 
                 aCategory[i].render(ctx);
                 // debug.text(".", debugX + i * 10, debugY);
-    
+
             }
         }else{
         for (var i = 0; i < aCategory.length; ++i) {
@@ -267,4 +270,3 @@ render: function(ctx) {
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
-
