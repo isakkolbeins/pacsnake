@@ -93,6 +93,10 @@ add_score : function(num){
     this.score = this.score + num;
 },
 
+get_score : function(){
+    return this.score;
+},
+
 show_score : function(ctx){
     ctx.save();
     ctx.fillStyle="white";
@@ -106,8 +110,6 @@ show_score : function(ctx){
     const score = document.createTextNode("score:" + this.score);
 
     div.appendChild(score);
-
-
 }
 }
 
@@ -224,7 +226,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        levelBackground : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/background.png",
+        levelBackground : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/backgroundvol2.png",
 
         ghostBlue       : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostBlue.png",
         ghostRed        : "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostRead.png",

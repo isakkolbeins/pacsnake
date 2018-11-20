@@ -104,8 +104,11 @@ init: function() {
 
 
 generateSnake : function(descr) {
-    this._snake.push(new Snake(descr));
+    var snake = new Snake(descr);
+    this._snake.push(snake);    
     this.generateTail(this._snake[0]);
+    // console.log ( snake.length + " --- " +  Math.floor(game_score.get_score()/20) );
+    // var tail_length = snake.length + Math.floor(game_score.get_score/20);
     for (let i = 0; i < descr.length; i++) {
         this.generateTail(this._tail[i]);
     }
@@ -212,7 +215,19 @@ update: function(du) {
         var aCategory = this._categories[c];
         var i = 0;
 
+        
         while (i < aCategory.length) {
+
+            if (aCategory === this._tail){
+                if ((Math.floor((game_score.get_score()+80)/20))>this._snake[0].length) {
+                    console.log("Runnar");
+                    this._snake[0].length += 1;
+                    var len = this._tail.length;
+                    this.generateTail(aCategory[len-1]);
+                    // this.generateSnake(this._snake[0].descr);
+                }
+
+            }
 
             var status = aCategory[i].update(du);
 

@@ -256,6 +256,7 @@ Ghost.prototype.getRadius = function () {
 };
 
 Ghost.prototype.eat = function () {
+    game_score.add_score(20);
     this.kill();
 };
 
