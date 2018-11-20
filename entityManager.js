@@ -99,6 +99,7 @@ init: function() {
     this._generateGhosts();
     //this._generateShip();
     this.generatePowerUp();
+   
 },
 
 generateSnake : function(descr) {
@@ -147,8 +148,8 @@ getSnakeIsBlue : function() {
     return this._snake[0].isBlue;
 },
 
-generateFood : function(){
-    this._food.push(new Food({cx:20,cy:20}));
+generateFood : function(descr){
+    this._food.push(new Food(descr));
 },
 
 

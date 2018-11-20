@@ -40,6 +40,17 @@ function createBeginningSnake() {
 
 }
 
+//========================
+// CREATE FOOD
+//=========================
+
+function createFood(){
+    entityManager.generateFood({cx:60,cy:60});
+    entityManager.generateFood({cx:80,cy:60});
+    entityManager.generateFood({cx:100,cy:60});
+    entityManager.generateFood({cx:120,cy:60});
+}
+
 // =============
 // GATHER INPUTS
 // =============
@@ -219,6 +230,7 @@ function preloadDone() {
 
     entityManager.init();
     createBeginningSnake();
+    createFood();
 
     main.init();
 }
