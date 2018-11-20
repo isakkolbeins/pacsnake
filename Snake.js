@@ -67,6 +67,7 @@ Snake.prototype.update = function (du) {
 
     this.wrapPosition();
     this.updateSprite();
+    this.eatSelf();
 
     //check if snake has eaten a powerUp
     this.eatPowerUp();
@@ -121,10 +122,18 @@ Snake.prototype.eatFood = function () {
 };
 
 Snake.prototype.eatSelf = function(){
-    var hitEntitys = this.findHitEntity();
+    var hitEntitys = spatialManager.findEntityInRange(this.cx,this.cy,10);
+    var tailhits =[];
 
-    if(hitEntitys.length > 0){
-        hitEntitys.forEach(hitEntity => {
+    for(var i=0;i<hitEntitys.length;i++){
+        if(hitEntitys[i].isTail){
+            tailhits.push(hitEntitys[i]);
+        }
+    }
+
+
+    if(tailhits.length > 3){
+        tailhits.forEach(hitEntity => {
             if(hitEntity.isTail){
                 console.log("should die!!");
             }
