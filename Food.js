@@ -38,7 +38,10 @@ Food.prototype.eat = function(){
     this.kill();
 
     setTimeout(this.respawn_food.bind(this),60000);
-    
+};
+
+Food.prototype.getRadius = function () {
+    return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
 Food.prototype.update = function(){

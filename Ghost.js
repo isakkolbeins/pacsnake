@@ -120,7 +120,7 @@ Ghost.prototype.getSnake = function () {
 }
 
 
-
+/*
 Ghost.prototype._moveToASafePlace = function () {
 
     // Move to a safe place some suitable distance away
@@ -152,7 +152,7 @@ Ghost.prototype._moveToASafePlace = function () {
         if (isSafePlace) break;
 
     }
-};
+};*/
 
 //generating a move for the ghost trying to catch the snake a little
 Ghost.prototype.getBestMove = function () {
@@ -308,6 +308,8 @@ Ghost.prototype.eat = function () {
     game_score.add_score(20);
     this.kill();
 };
+
+
 
 //resetting the ghost 
 Ghost.prototype.reset = function () {

@@ -73,8 +73,7 @@ Snake.prototype.update = function (du) {
     if(!Level.checkCollisionSnake((this.cx + this.velX * du), (this.cy + this.velY * du))){
         this.cx += this.velX * du;
         this.cy += this.velY * du;
-    }
-    
+    }    
 
     this.rotation = util.wrapRange(this.rotation,
                                 0, consts.FULL_CIRCLE);
