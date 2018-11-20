@@ -7,7 +7,7 @@ function Food(descr){
     this.rememberResets();
 
     
-    this._scale = 1;
+    this.scale = 0.3;
     this._isWarping = false;
 
     this.canBeEaten = true;
@@ -53,10 +53,16 @@ Food.prototype.update = function(){
 
 Food.prototype.render = function(ctx){
 
-    ctx.save();
+  /*  ctx.save();
     ctx.fillStyle = "yellow";
     util.fillCircle(ctx,this.cx,this.cy,radius);
     ctx.restore();
+    */
+   this.sprite.scale = this.scale;
+    this.sprite.alpha = 0.7;
+    this.sprite.drawWrappedCentredAt(
+        ctx, this.cx, this.cy, this.rotation
+    );
 };
 
 Food.prototype.respawn_food = function(){

@@ -52,12 +52,25 @@ function createFood(){
     for(var i=0;i<18;i++){
         for(var j=0;j<18;j++){
         
-            if(i===0 || i==1){
+            if((i < 2)||(i>15)){
               entityManager.generateFood(new Food({cx:x,cy:y}));  
             }
-            else if(j===0||j==1){
+            else if((j<2)||(j>15)){
               entityManager.generateFood(new Food({cx:x,cy:y})); 
             }
+            else if(((i===5)||(i===6))&&((j>3)&&(j<14))){
+              entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            else if(((i===11)||(i===12))&&((j>3)&&(j<14))){
+                entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            else if(((j===4)||(j===5))&&((i>=5)&&(i<=12))){
+                entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            else if(((j===12)||(j===13))&&((i>=5)&&(i<=12))){
+                entityManager.generateFood(new Food({cx:x,cy:y})); 
+            }
+            
            
         x += 40; 
         }
@@ -87,6 +100,13 @@ show_score : function(ctx){
     var text = "Score: " + this.score;
     ctx.fillText(text,350, 20);
     ctx.restore();
+
+
+    const div = document.createElement("div");
+    const score = document.createTextNode("score:" + this.score);
+
+    div.appendChild(score);
+
 
 }
 }
