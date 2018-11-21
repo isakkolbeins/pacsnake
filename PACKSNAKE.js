@@ -155,10 +155,11 @@ function updateSimulation(du) {
 
     
     processDiagnostics();
+    // If the game is over, stop the updates
     if (!g_gameOver) {
         entityManager.update(du);
-    }else setTimeout(triggerGameOver(), 5000);
-
+    } else gameOver.update(du); // If over, start countdown to animation
+        
 
 }
 
@@ -221,31 +222,19 @@ function processDiagnostics() {
 
 
 // GAME-SPECIFIC RENDERING
-var animationFinished = false;
+/*var animationFinished = false;
 var startAnimation = false;
 function triggerGameOver() {
     startAnimation = true;
-}
+}*/
 
 function renderSimulation(ctx) {
+    // Render all the entities in enitiyManager
+    entityManager.render(ctx);
+    // If the game is over, draw an overlay and start the gameover animation
+    if(g_gameOver) gameOver.render(ctx);
 
-    if(startAnimation){
-        
-        entityManager.render(ctx);
-        util.drawOverlay(ctx);
-
-        if(!animationFinished){
-            g_sprites.gameOver.drawWrappedCentredAt(ctx, 400, 400, 0);
-        } else{
-            g_sprites.gameFinished.drawWrappedCentredAt(ctx, 400, 400, 0);
-        }
-    } else {
-        entityManager.render(ctx);
-
-     if (g_renderSpatialDebug) spatialManager.render(ctx);
-    }
-    if(g_sprites.gameOver.isLastFrame()) animationFinished = true;   
-
+    if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
 
