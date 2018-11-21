@@ -94,7 +94,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._tail, this._snake, this._ghosts, this._powerup,this._food];
+    this._categories = [this._food, this._tail, this._snake, this._powerup, this._ghosts];
 },
 
 init: function() {
@@ -164,6 +164,10 @@ getSnakePos : function() {
 
 getSnakeIsBlue : function() {
     return this._snake[0].isBlue;
+},
+
+getSnakeHasLittleTime : function() {
+    return this._snake[0].hasLittleTime;
 },
 
 generateFood : function(food){
