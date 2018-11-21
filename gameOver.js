@@ -14,12 +14,11 @@ var gameOver = {
 
 
     update : function(du) {
-        // setTimeout(() => {
-        //     this.startAnimation = true;        
-        // }, 1000);
+         setTimeout(() => {
+                this.startAnimation = true;        
+         }, 1000);
         if(!this.startAnimation){
             g_sprites.gameOver.setToFirstFrame();
-            this.startAnimation = true;
         }
 
     },
