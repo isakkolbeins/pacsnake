@@ -5,6 +5,7 @@ var audioManager = {
     // Audio management
     audioMain       : new Audio(),
     audioBlue       : new Audio(),
+    audioGameOver   : new Audio(),
     initialAudio    : true,
     loopSource      : 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/loopGB',
     fadeOutInterval : 0,
@@ -15,13 +16,15 @@ var audioManager = {
     // Initialiser
     init : function() {
         // Audio file urls
-        this.audioMain.src = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/GB';
-        this.audioBlue.src = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/Blue';
+        this.audioMain.src      = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/GB.mp3';
+        this.audioBlue.src      = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/Blue.mp3';
+        this.audioGameOver.src  = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/GameOver.mp3';
 
         // Event listeners to detect when the music finishes
         this.audioMain.addEventListener("ended", this.switchToLoopAudio.bind(this));
         this.audioMain.addEventListener("ended", this.playMainMusic.bind(this));
         this.audioBlue.addEventListener("ended", this.playMainMusic.bind(this));
+        this.audioGameOver.addEventListener("ended", this.stopMusic.bind(this));
 
         this.playMainMusic();
     },
@@ -40,7 +43,7 @@ var audioManager = {
         this.audioMain.play();
     },
 
-    // Stops main music and plays blue music
+    // Plays blue musics
     playBlueMusic : function() {
         this.audioBlue.play();
 
@@ -49,10 +52,17 @@ var audioManager = {
         setTimeout(this.switchToLoopAudio.bind(this), 500);
     },
 
+    // Plays game over music
+    playGameOverMusic : function () {
+        this.stopMusic();
+        this.audioGameOver.play();
+    },
+
     // Stops all music
     stopMusic : function() {
         this.audioMain.pause();
         this.audioBlue.pause();
+        this.audioGameOver.pause();
     },
 
     // Mutes all music
