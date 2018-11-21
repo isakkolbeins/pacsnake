@@ -365,8 +365,7 @@ function preloadDone() {
     });*/
 
     entityManager.init();
-    // Google Chrome doesn't like audio being played without user interaction :(
-    setTimeout(audioManager.init(), 4000);
+    audioManager.init();
     createBeginningSnake();
     createFood();
 

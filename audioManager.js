@@ -19,8 +19,9 @@ var audioManager = {
         this.audioBlue.src = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/Blue';
 
         // Event listeners to detect when the music finishes
-        this.audioBlue.addEventListener("ended", this.playMainMusic.bind(this));
         this.audioMain.addEventListener("ended", this.switchToLoopAudio.bind(this));
+        this.audioMain.addEventListener("ended", this.playMainMusic.bind(this));
+        this.audioBlue.addEventListener("ended", this.playMainMusic.bind(this));
 
         this.playMainMusic();
     },
@@ -67,7 +68,6 @@ var audioManager = {
             this.audioMain.src = this.loopSource;
             this.audioMain.currentTime = 0;
             this.audioMain.loop = true;
-            this.playMainMusic();
         }
     },
 
@@ -98,6 +98,7 @@ var audioManager = {
         }
     },
 
+    // Returns true if the M(mute) key has been pressed
     muteKeyPressed : function() {
         if (eatKey(this.KEY_MUTE)) {
             this.musicMuted = !this.musicMuted;
