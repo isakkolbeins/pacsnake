@@ -77,8 +77,30 @@ wrappedDistSq: function(x1, y1, x2, y2, xWrap, yWrap) {
 // CANVAS OPS
 // ==========
 
+/*updateBackground: function() {
+
+    var img = new Image;
+    img.crossOrigin = "anonymous";
+    img.src = g_canvas.toDataURL();
+    
+    g_backgound = img;
+    // g_backgound = ctx.getImageData(0, 0, 800, 800);
+    // g_backgound.src = url + '?' + new Date().getTime();
+    // g_backgound.setAttribute('crossOrigin', '');
+    // g_backgound.crossOrigin = "Anonymous";
+
+},*/
+
 clearCanvas: function (ctx) {
-    ctx.drawImage(g_images.levelBackground, 0, 0);
+    ctx.drawImage(g_backgound, 0, 0);
+},
+
+drawOverlay: function (ctx) {
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle ="black";
+    ctx.fillRect(0, 0, 800, 800);
+    ctx.restore();
 },
 
 strokeCircle: function (ctx, x, y, r) {

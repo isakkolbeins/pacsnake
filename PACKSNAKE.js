@@ -19,6 +19,7 @@
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 var g_gameOver = false;
+var g_backgound;
 
 /*
 0        1         2         3         4         5         6         7         8
@@ -156,8 +157,7 @@ function updateSimulation(du) {
     processDiagnostics();
     if (!g_gameOver) {
         entityManager.update(du);
-    }
-
+    }else setTimeout(triggerGameOver(), 5000);
 
 
 }
@@ -222,12 +222,18 @@ function processDiagnostics() {
 
 // GAME-SPECIFIC RENDERING
 var animationFinished = false;
-
+var startAnimation = false;
+function triggerGameOver() {
+    startAnimation = true;
+}
 
 function renderSimulation(ctx) {
 
-    if(g_gameOver){
-        // setTimeout(startTimeout(), 50000);
+    if(startAnimation){
+        
+        entityManager.render(ctx);
+        util.drawOverlay(ctx);
+
         if(!animationFinished){
             g_sprites.gameOver.drawWrappedCentredAt(ctx, 400, 400, 0);
         } else{
@@ -238,10 +244,7 @@ function renderSimulation(ctx) {
 
      if (g_renderSpatialDebug) spatialManager.render(ctx);
     }
-
-    // console.log(g_sprites.gameOver.isLastFrame());
-    if(g_sprites.gameOver.isLastFrame()) animationFinished = true;
-    
+    if(g_sprites.gameOver.isLastFrame()) animationFinished = true;   
 
 }
 
@@ -535,7 +538,7 @@ function preloadDone() {
         g_images.gameOver79,
         g_images.gameOver80,
     ]*/
-
+    g_backgound = g_images.levelBackground;
 
     entityManager.init();
     createBeginningSnake();

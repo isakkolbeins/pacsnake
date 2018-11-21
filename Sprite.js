@@ -45,11 +45,10 @@ Sprite.prototype.getFrame = function () {
 Sprite.prototype.isLastFrame = function() {
     return this.frame === this.frameCount;
 }
-
+/*
 Sprite.prototype.drawAt = function (ctx, x, y) {
-    ctx.drawImage(img, 
-                  x, y);
-};
+    ctx.drawImage(img, x, y);
+};*/
 
 Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
     if (rotation === undefined) rotation = 0;
