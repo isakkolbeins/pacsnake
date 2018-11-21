@@ -91,8 +91,11 @@ var game_score = {
     score: 0,
 
     add_score: function (num) {
-        this.score = this.score + num;
+        if(!g_gameOver){        // To prevent js hackers
+            this.score = this.score + num;
+        }
     },
+
 
     get_score: function () {
         return this.score;
@@ -101,9 +104,10 @@ var game_score = {
     show_score: function (ctx) {
         ctx.save();
         ctx.fillStyle = "white";
+        ctx.textAlign="center";
         ctx.font = "bold 20px Arial";
         var text = "Score: " + this.score;
-        ctx.fillText(text, 350, 20);
+        ctx.fillText(text, 400, 20);
         ctx.restore();
     }
 }
@@ -375,7 +379,7 @@ function getGameOver(json) {
     for(var i = 0; i < 80; i++){
         var num = i;
         if (i<10) num = "0"+i;
-        console.log("gameOver"+num + " = https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver"+ num +".png")
+        // console.log("gameOver"+num + " = https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver"+ num +".png")
         json["gameOver"+num] = "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver"+ num +".png" ;
     }
 }
@@ -387,7 +391,6 @@ function getGameOverImgs(){
             gameOverImgs.push(g_images[key]);
         }
     });
-    console.log(gameOverImgs[81]);
     return gameOverImgs;
 }
 

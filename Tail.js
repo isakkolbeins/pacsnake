@@ -24,7 +24,7 @@ function Tail(descr) {
     this.isWaiting = true;
     this.isBlue = false;
     this.isTail = true;
-    console.log("this can kill you: " + this.canItKill);
+    // console.log("this can kill you: " + this.canItKill);
     this.decDelay = 1;
     this.num = 50;
     this.isGhostWall = true;

@@ -135,7 +135,7 @@ generateTail : function(follow) {
         delay : delay,
         canItKill: itCanKill,
         delayMax : delayMax};
-    console.log(this._tail.length +"=====================================================" );
+    // console.log(this._tail.length +"=====================================================" );
     this._tail.push(new Tail(descr));
 },
 
@@ -238,7 +238,7 @@ update: function(du) {
 
             if (aCategory === this._tail){
                 if ((Math.floor((game_score.get_score()+80)/10))>this._snake[0].length) {
-                    console.log("Runnar");
+                    // console.log("Runnar");
                     this._snake[0].length += 1;
                     var len = this._tail.length;
                     this.generateTail(aCategory[len-1]);

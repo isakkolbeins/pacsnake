@@ -114,7 +114,7 @@ Ghost.prototype.getSnake = function () {
         if (!hitEntity.isBlue && hitEntity.isHead) {
             // hitEntity.kill();
             hitEntity.gameOver();
-            console.log("killed by ghost");
+            // console.log("killed by ghost");
             // g_isUpdatePaused = true;
         }
     });
