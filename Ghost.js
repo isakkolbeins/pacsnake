@@ -107,53 +107,16 @@ Ghost.prototype.rememberResets = function () {
 Ghost.prototype.rotation = 0;
 
 //Killing the snake if the ghost and snake collide
+//providing the ghost is edible and its the snakes head
 Ghost.prototype.getSnake = function () {
     var hitEntitys = spatialManager.findEntityInRange(this.cx, this.cy, 10);
 
     hitEntitys.forEach(hitEntity => {
-        if (!hitEntity.isBlue && hitEntity.isHead) {
-            // hitEntity.kill();
+        if (!hitEntity.isEdible && hitEntity.isHead) {
             hitEntity.gameOver();
-            // console.log("killed by ghost");
-            // g_isUpdatePaused = true;
         }
     });
 }
-
-
-/*
-Ghost.prototype._moveToASafePlace = function () {
-
-    // Move to a safe place some suitable distance away
-    var origX = this.cx,
-        origY = this.cy,
-        MARGIN = 40,
-        isSafePlace = false;
-
-    for (var attempts = 0; attempts < 100; ++attempts) {
-
-        var warpDistance = 100 + Math.random() * g_canvas.width / 2;
-        var warpDirn = Math.random() * consts.FULL_CIRCLE;
-
-        this.cx = origX + warpDistance * Math.sin(warpDirn);
-        this.cy = origY - warpDistance * Math.cos(warpDirn);
-
-        this.wrapPosition();
-
-        // Don't go too near the edges, and don't move into a collision!
-        if (!util.isBetween(this.cx, MARGIN, g_canvas.width - MARGIN)) {
-            isSafePlace = false;
-        } else if (!util.isBetween(this.cy, MARGIN, g_canvas.height - MARGIN)) {
-            isSafePlace = false;
-        } else {
-            isSafePlace = !this.isColliding();
-        }
-
-        // Get out as soon as we find a safe place
-        if (isSafePlace) break;
-
-    }
-};*/
 
 //generating a move for the ghost trying to catch the snake a little
 Ghost.prototype.getBestMove = function () {
