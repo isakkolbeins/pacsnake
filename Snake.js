@@ -210,11 +210,9 @@ Snake.prototype.updateSprite = function () {
 
 Snake.prototype.render = function (ctx) {
     
-
     this.sprite.drawWrappedCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
-    
         
     ctx.globalAlpha = 1;
 };

@@ -219,9 +219,17 @@ function processDiagnostics() {
 
 function renderSimulation(ctx) {
 
-    entityManager.render(ctx);
+    if(true){
+        g_sprites.gameOver.drawWrappedCentredAt(
+            ctx, 400, 400, 0
+        );
+    } else {
+        entityManager.render(ctx);
 
-    if (g_renderSpatialDebug) spatialManager.render(ctx);
+     if (g_renderSpatialDebug) spatialManager.render(ctx);
+    }
+    
+
 }
 
 
@@ -347,10 +355,27 @@ function requestPreloads() {
         gameOver77: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver77.png",
         gameOver78: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver78.png",
         gameOver79: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver79.png",
-        gameOver80: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver00.png"
+        gameOver80: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver80.png"
+
+        //gameOver: getGameOver(),
+       
+
+
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
+}
+
+function getGameOver() {
+    var imgs = [81];
+    for(var i = 0; i <= 80; i++){
+        imgs[i] = "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver";
+        if(i < 10){
+            imgs[i] += "0";
+        }
+        imgs[i] += i + ".png";
+    }
+    return imgs;
 }
 
 var g_sprites = {};
@@ -395,6 +420,93 @@ function preloadDone() {
     g_sprites.ghostBlinking = new Sprite(0.005, 
     [g_images.ghostEdible,
     g_images.ghostWhite]);
+
+    //g_sprites.gameOver = new Sprite(0.005, g_images.gameOver); 
+
+    g_sprites.gameOver = new Sprite(0.05, [g_images.gameOver00, 
+        g_images.gameOver00,
+        g_images.gameOver01,
+        g_images.gameOver02,
+        g_images.gameOver03,
+        g_images.gameOver04,
+        g_images.gameOver05,
+        g_images.gameOver06,
+        g_images.gameOver07,
+        g_images.gameOver08,
+        g_images.gameOver09,
+        g_images.gameOver10,
+        g_images.gameOver11,
+        g_images.gameOver12,
+        g_images.gameOver13,
+        g_images.gameOver14,
+        g_images.gameOver15,
+        g_images.gameOver16,
+        g_images.gameOver17,
+        g_images.gameOver18,
+        g_images.gameOver19,
+        g_images.gameOver20,
+        g_images.gameOver21,
+        g_images.gameOver22,
+        g_images.gameOver23,
+        g_images.gameOver24,
+        g_images.gameOver25,
+        g_images.gameOver26,
+        g_images.gameOver27,
+        g_images.gameOver28,
+        g_images.gameOver29,
+        g_images.gameOver30,
+        g_images.gameOver31,
+        g_images.gameOver32,
+        g_images.gameOver33,
+        g_images.gameOver34,
+        g_images.gameOver35,
+        g_images.gameOver36,
+        g_images.gameOver37,
+        g_images.gameOver38,
+        g_images.gameOver39,
+        g_images.gameOver40,
+        g_images.gameOver41,
+        g_images.gameOver42,
+        g_images.gameOver43,
+        g_images.gameOver44,
+        g_images.gameOver45,
+        g_images.gameOver46,
+        g_images.gameOver47,
+        g_images.gameOver48,
+        g_images.gameOver49,
+        g_images.gameOver50,
+        g_images.gameOver51,
+        g_images.gameOver52,
+        g_images.gameOver53,
+        g_images.gameOver54,
+        g_images.gameOver55,
+        g_images.gameOver56,
+        g_images.gameOver57,
+        g_images.gameOver58,
+        g_images.gameOver59,
+        g_images.gameOver60,
+        g_images.gameOver61,
+        g_images.gameOver62,
+        g_images.gameOver63,
+        g_images.gameOver64,
+        g_images.gameOver65,
+        g_images.gameOver66,
+        g_images.gameOver67,
+        g_images.gameOver68,
+        g_images.gameOver69,
+        g_images.gameOver70,
+        g_images.gameOver71,
+        g_images.gameOver72,
+        g_images.gameOver73,
+        g_images.gameOver74,
+        g_images.gameOver75,
+        g_images.gameOver76,
+        g_images.gameOver77,
+        g_images.gameOver78,
+        g_images.gameOver79,
+        g_images.gameOver80,
+    ]); 
+
 
     entityManager.init();
     createBeginningSnake();
