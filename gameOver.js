@@ -14,15 +14,19 @@ var gameOver = {
 
 
     update : function(du) {
-        setTimeout(() => {
-            this.startAnimation = true;        
-        }, 500);
+        // setTimeout(() => {
+        //     this.startAnimation = true;        
+        // }, 1000);
+        if(!this.startAnimation){
+            g_sprites.gameOver.setToFirstFrame();
+            this.startAnimation = true;
+        }
+
     },
 
     render : function(ctx) {
         util.drawOverlay(ctx);
-        if(this.startAnimation){        
-    
+        if(this.startAnimation){ 
             if(!this.animationFinished){
                 g_sprites.gameOver.drawWrappedCentredAt(ctx, 400, 400, 0);
             } else{

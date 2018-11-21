@@ -31,7 +31,6 @@ Sprite.prototype.getFrame = function () {
     if(this.frame > this.frameCount){
         this.frame = 0;
     }
-
     var img = this.images[this.frame];
 
     this.speedCounter += this.speed;
@@ -40,6 +39,10 @@ Sprite.prototype.getFrame = function () {
         this.speedCounter = 0;
     }    
     return img;
+}
+
+Sprite.prototype.setToFirstFrame = function () {
+    this.frame = 0;
 }
 
 Sprite.prototype.isLastFrame = function() {
