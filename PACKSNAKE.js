@@ -139,13 +139,13 @@ function gatherInputs() {
 
 function updateSimulation(du) {
 
-    
+
     processDiagnostics();
     // If the game is over, stop the updates
     if (!g_gameOver) {
         entityManager.update(du);
     } else gameOver.update(du); // If over, start countdown to animation
-        
+
 
 }
 
@@ -277,7 +277,7 @@ function requestPreloads() {
     };
 
     getGameOver(requiredImages);
-    
+
 
     imagesPreload(requiredImages, g_images, preloadDone);
 }
@@ -321,19 +321,19 @@ function preloadDone() {
 
     var snakeUpdateSpeed = 0.03;
 
-    g_sprites.snakeHeadL = new Sprite(snakeUpdateSpeed, 
+    g_sprites.snakeHeadL = new Sprite(snakeUpdateSpeed,
     [g_images.snakeHead0L,
     g_images.snakeHead1L,
     g_images.snakeHead2L,
     g_images.snakeHead3L]);
 
-    g_sprites.snakeHeadR = new Sprite(snakeUpdateSpeed, 
+    g_sprites.snakeHeadR = new Sprite(snakeUpdateSpeed,
     [g_images.snakeHead0R,
     g_images.snakeHead1R,
     g_images.snakeHead2R,
     g_images.snakeHead3R]);
 
-    g_sprites.snakeHeadBlueL = new Sprite(snakeUpdateSpeed, 
+    g_sprites.snakeHeadBlueL = new Sprite(snakeUpdateSpeed,
     [g_images.snakeHeadBlue0L,
     g_images.snakeHeadBlue1L,
     g_images.snakeHeadBlue2L,
@@ -345,7 +345,7 @@ function preloadDone() {
     g_images.snakeHeadBlue2R,
     g_images.snakeHeadBlue3R]);
 
-    g_sprites.ghostBlinking = new Sprite(0.005, 
+    g_sprites.ghostBlinking = new Sprite(0.005,
     [g_images.ghostEdible,
     g_images.ghostWhite]);
 
@@ -353,17 +353,18 @@ function preloadDone() {
 
 
 
-    //g_sprites.gameOver = new Sprite(0.005, g_images.gameOver); 
+    //g_sprites.gameOver = new Sprite(0.005, g_images.gameOver);
     var gameOverImgs = getGameOverImgs();
-    
 
-    g_sprites.gameOver = new Sprite(0.04, gameOverImgs); 
+
+    g_sprites.gameOver = new Sprite(0.04, gameOverImgs);
 /*
     gameOverImgs.forEach(img => {
         console.log(img.name);
     });*/
 
     entityManager.init();
+    audioManager.init();
     createBeginningSnake();
     createFood();
 

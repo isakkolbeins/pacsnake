@@ -1,3 +1,5 @@
+"use strict";
+
 var audioManager = {
 
     // Audio management
@@ -20,7 +22,9 @@ var audioManager = {
             this.playMainMusic();
         });
 
-        this.audioMain.addEventListener("ended", switchToLoopAudio(););
+        this.audioMain.addEventListener("ended", this.switchToLoopAudio());
+
+        this.playMainMusic();
     },
 
 
