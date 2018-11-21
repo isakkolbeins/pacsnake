@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    background-color: black;
+}
+
+h1 {
+    font-size: 50px;
+    color: yellow;
+    display: flex;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+canvas {
+    margin: 0 auto;
+}
