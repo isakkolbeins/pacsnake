@@ -267,28 +267,13 @@ Ghost.prototype.update = function (du) {
     }
     this.wrapPosition();
 
-    if (Level.checkCollisionGhost((this.cx + this.velX * this.speed * du), (this.cy + this.velY * this.speed * du))) {
+    var nextX = this.velX * this.speed * du;
+    var nextY = this.velY * this.speed * du;
 
-        //chooses a random number -1 or 1
-        var random = 1;
-        if (rand < 0.5) {
-            random = -1;
-        }
-
-        //if the ghosts hit a wall the turn left or right 
-        if (this.velX === 1) {
-            this.velX = 0;
-            this.velY = 1 * random;
-        } else if (this.velX === -1) {
-            this.velX = 0;
-            this.velY = 1 * random;
-        } else if (this.velY === 1) {
-            this.velX = 1 * random;
-            this.velY = 0;
-        } else if (this.velY === -1) {
-            this.velX = 1 * random;
-            this.velY = 0;
-        }
+    if (Level.checkCollisionGhost((this.cx + nextX), (this.cy + nextY))
+        || this.hitTail()) {
+        this.changeDirection(rand);
+        
     } else {
         this.cx += this.velX * this.speed * du;
         this.cy += this.velY * this.speed * du;
@@ -296,6 +281,42 @@ Ghost.prototype.update = function (du) {
 
     spatialManager.register(this);
 
+};
+
+Ghost.prototype.hitTail = function () {
+
+    var hitEntitys = this.findHitEntity();
+    if (hitEntitys.length > 0) {
+        hitEntitys.forEach(hitEntity => {
+            if(hitEntity.isTail){
+                return true;
+            }
+        });   
+    }
+    return false;
+};
+
+Ghost.prototype.changeDirection = function(rand) {
+    //chooses a random number -1 or 1
+    var random = 1;
+    if (rand < 0.5) {
+        random = -1;
+    }
+
+    //if the ghosts hit a wall the turn left or right 
+    if (this.velX === 1) {
+        this.velX = 0;
+        this.velY = 1 * random;
+    } else if (this.velX === -1) {
+        this.velX = 0;
+        this.velY = 1 * random;
+    } else if (this.velY === 1) {
+        this.velX = 1 * random;
+        this.velY = 0;
+    } else if (this.velY === -1) {
+        this.velX = 1 * random;
+        this.velY = 0;
+    }
 };
 
 
