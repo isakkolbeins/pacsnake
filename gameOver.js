@@ -17,9 +17,9 @@ var gameOver = {
         /*if(!this.startAnimation){
             g_sprites.gameOver.setToFirstFrame();
         }*/
-         setTimeout(() => {
-                this.startAnimation = true;        
-         }, 1000);
+        this.startAnimation = true;        
+         /*setTimeout(() => {
+         }, 1000);*/
         
 
     },
@@ -29,6 +29,7 @@ var gameOver = {
         if(this.startAnimation){ 
             if(!this.animationFinished){
                 g_sprites.gameOver.drawWrappedCentredAt(ctx, 400, 400, 0);
+                util.drawReplay(ctx);
             } else{
                 g_sprites.gameFinished.drawWrappedCentredAt(ctx, 400, 400, 0);
                 util.drawReplay(ctx);

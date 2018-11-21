@@ -457,7 +457,7 @@ function preloadDone() {
     var gameOverImgs = getGameOverImgs();
     
 
-    g_sprites.gameOver = new Sprite(0.03, gameOverImgs); 
+    g_sprites.gameOver = new Sprite(0.04, gameOverImgs); 
 /*
     gameOverImgs.forEach(img => {
         console.log(img.name);
