@@ -6,6 +6,7 @@ var audioManager = {
     audioMain       : new Audio(),
     audioBlue       : new Audio(),
     initialAudio    : true,
+    loopSource      : 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/loopGB',
     fadeOutInterval : 0,
     fadeInInterval  : 0,
     KEY_MUTE        : 'M'.charCodeAt(0),
@@ -19,12 +20,12 @@ var audioManager = {
 
         // Event listeners to detect when the music finishes
         this.audioBlue.addEventListener("ended", this.playMainMusic.bind(this));
-
         this.audioMain.addEventListener("ended", this.switchToLoopAudio.bind(this));
 
         this.playMainMusic();
     },
 
+    // Update function, mainly for the mute option
     update : function(du) {
         if (this.muteKeyPressed()) {
             this.muteMusic();
@@ -63,9 +64,10 @@ var audioManager = {
     switchToLoopAudio : function() {
         if (this.initialAudio) {
             this.initialAudio = false;
-            this.audioMain.src = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/loopGB';
+            this.audioMain.src = this.loopSource;
             this.audioMain.currentTime = 0;
             this.audioMain.loop = true;
+            this.playMainMusic();
         }
     },
 
