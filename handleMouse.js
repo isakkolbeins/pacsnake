@@ -25,7 +25,7 @@ function handleMouse(evt) {
     if (!button) return;
     
     if(g_gameOver && util.isBetween(g_mouseX, 400-125, 400+125) && util.isBetween(g_mouseY, 650-40, 650+40)){
-        location.reload();
+        location.reload(false);
     } 
     
   
