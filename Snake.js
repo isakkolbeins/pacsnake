@@ -76,6 +76,7 @@ Snake.prototype.update = function (du) {
         this.cy += this.velY * du;
     } else {
         this.gameOver();
+
         // this.kill()
     }
 
@@ -142,6 +143,7 @@ Snake.prototype.eatFood = function () {
 
 Snake.prototype.gameOver = function () {
     g_gameOver = true;
+    this.updateSprite();
     // g_isUpdatePaused = true;
 }
 
@@ -205,12 +207,22 @@ Snake.prototype.littleTime = function () {
 
 Snake.prototype.updateSprite = function () {
     if(this.direction == 'L') {
-        if(!this.isBlue)this.sprite = g_sprites.snakeHeadL;
-        else this.sprite = g_sprites.snakeHeadBlueL;
+        if(!this.isBlue){
+            if(g_gameOver) this.sprite = g_sprites.snakeHeadDeadL;
+            else this.sprite = g_sprites.snakeHeadL;
+        }else {
+            if(g_gameOver) this.sprite = g_sprites.snakeHeadDeadBlueL;
+            else this.sprite = g_sprites.snakeHeadBlueL;
+        }
     }
     else {
-        if(!this.isBlue) this.sprite = g_sprites.snakeHeadR;
-        else this.sprite = g_sprites.snakeHeadBlueR;
+        if(!this.isBlue){
+            if(g_gameOver) this.sprite = g_sprites.snakeHeadDeadR;
+            else this.sprite = g_sprites.snakeHeadR;
+        }else {
+            if(g_gameOver) this.sprite = g_sprites.snakeHeadDeadBlueR;
+            else this.sprite = g_sprites.snakeHeadBlueR;
+        }
     }
 };
 

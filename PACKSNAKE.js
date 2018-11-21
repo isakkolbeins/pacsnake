@@ -282,6 +282,13 @@ function requestPreloads() {
         snakeHeadBlue1R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR1.png",
         snakeHeadBlue2R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR2.png",
         snakeHeadBlue3R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR3.png",
+
+        snakeHeadDeadL: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadDeadL.png",
+        snakeHeadDeadR: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadDeadR.png",
+        snakeHeadDeadBlueL: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadDeadBlueL.png",
+        snakeHeadDeadBlueR: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeHeadDeadBlueR.png",
+
+
         gameFinished: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver80.png"
 /*
         gameOver00: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver00.png",
@@ -406,6 +413,11 @@ function preloadDone() {
 
     g_sprites.snakeBoddy = new Sprite(1, [g_images.snakeBoddy]);
     g_sprites.snakeBoddyBlue = new Sprite(1, [g_images.snakeBoddyBlue]);
+
+    g_sprites.snakeHeadDeadL = new Sprite(1, [g_images.snakeHeadDeadL]);
+    g_sprites.snakeHeadDeadR = new Sprite(1, [g_images.snakeHeadDeadR]);
+    g_sprites.snakeHeadDeadBlueL = new Sprite(1, [g_images.snakeHeadDeadBlueL]);
+    g_sprites.snakeHeadDeadBlueR = new Sprite(1, [g_images.snakeHeadDeadBlueR]);
 
     var snakeUpdateSpeed = 0.03;
 
