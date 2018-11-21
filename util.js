@@ -122,6 +122,17 @@ drawReplay: function (ctx, hover) {
     ctx.restore();
 },
 
+noPause: function (ctx) {
+    ctx.font = "bold 24px Arial";
+    ctx.textAlign="center";
+    var msg = "There is NO";
+    var msg1 = "pausing in";
+    var msg2 = "REAL LIFE!!";
+    ctx.fillText(msg, 400, 380);
+    ctx.fillText(msg1, 400, 405);
+    ctx.fillText(msg2, 400, 435);
+},
+
 strokeCircle: function (ctx, x, y, r) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2);
