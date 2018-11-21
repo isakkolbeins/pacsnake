@@ -18,6 +18,7 @@
 
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
+var g_gameOver = false;
 
 /*
 0        1         2         3         4         5         6         7         8
@@ -151,9 +152,13 @@ function gatherInputs() {
 
 function updateSimulation(du) {
 
+    
     processDiagnostics();
+    if (!g_gameOver) {
+        entityManager.update(du);
+    }
 
-    entityManager.update(du);
+
 
 }
 
@@ -216,18 +221,26 @@ function processDiagnostics() {
 
 
 // GAME-SPECIFIC RENDERING
+var animationFinished = false;
+
 
 function renderSimulation(ctx) {
 
-    if(true){
-        g_sprites.gameOver.drawWrappedCentredAt(
-            ctx, 400, 400, 0
-        );
+    if(g_gameOver){
+        // setTimeout(startTimeout(), 50000);
+        if(!animationFinished){
+            g_sprites.gameOver.drawWrappedCentredAt(ctx, 400, 400, 0);
+        } else{
+            g_sprites.gameFinished.drawWrappedCentredAt(ctx, 400, 400, 0);
+        }
     } else {
         entityManager.render(ctx);
 
      if (g_renderSpatialDebug) spatialManager.render(ctx);
     }
+
+    // console.log(g_sprites.gameOver.isLastFrame());
+    if(g_sprites.gameOver.isLastFrame()) animationFinished = true;
     
 
 }
@@ -274,7 +287,8 @@ function requestPreloads() {
         snakeHeadBlue1R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR1.png",
         snakeHeadBlue2R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR2.png",
         snakeHeadBlue3R: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_SnakeHeadBlueR3.png",
-
+        gameFinished: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver80.png"
+/*
         gameOver00: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver00.png",
         gameOver01: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver01.png",
         gameOver02: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver02.png",
@@ -356,26 +370,34 @@ function requestPreloads() {
         gameOver78: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver78.png",
         gameOver79: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver79.png",
         gameOver80: "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver80.png"
-
+*/
         //gameOver: getGameOver(),
-       
-
-
     };
+
+    getGameOver(requiredImages);
+    
 
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 
-function getGameOver() {
-    var imgs = [81];
-    for(var i = 0; i <= 80; i++){
-        imgs[i] = "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver";
-        if(i < 10){
-            imgs[i] += "0";
-        }
-        imgs[i] += i + ".png";
+function getGameOver(json) {
+    for(var i = 0; i < 80; i++){
+        var num = i;
+        if (i<10) num = "0"+i;
+        console.log("gameOver"+num + " = https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver"+ num +".png")
+        json["gameOver"+num] = "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver"+ num +".png" ;
     }
-    return imgs;
+}
+
+function getGameOverImgs(){
+    var gameOverImgs = [];
+    Object.keys(g_images).forEach(key => {
+        if(key.includes("gameOver")){
+            gameOverImgs.push(g_images[key]);
+        }
+    });
+    console.log(gameOverImgs[81]);
+    return gameOverImgs;
 }
 
 var g_sprites = {};
@@ -421,9 +443,16 @@ function preloadDone() {
     [g_images.ghostEdible,
     g_images.ghostWhite]);
 
-    //g_sprites.gameOver = new Sprite(0.005, g_images.gameOver); 
+    g_sprites.gameFinished = new Sprite(1, [g_images.gameFinished]);
 
-    g_sprites.gameOver = new Sprite(0.05, [g_images.gameOver00, 
+
+
+    //g_sprites.gameOver = new Sprite(0.005, g_images.gameOver); 
+    var gameOverImgs = getGameOverImgs();
+    
+
+    g_sprites.gameOver = new Sprite(0.04, gameOverImgs); 
+        /*[g_images.gameOver00, 
         g_images.gameOver00,
         g_images.gameOver01,
         g_images.gameOver02,
@@ -505,7 +534,7 @@ function preloadDone() {
         g_images.gameOver78,
         g_images.gameOver79,
         g_images.gameOver80,
-    ]); 
+    ]*/
 
 
     entityManager.init();

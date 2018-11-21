@@ -112,9 +112,10 @@ Ghost.prototype.getSnake = function () {
 
     hitEntitys.forEach(hitEntity => {
         if (!hitEntity.isBlue && hitEntity.isHead) {
-            hitEntity.kill();
+            // hitEntity.kill();
+            hitEntity.gameOver();
             console.log("killed by ghost");
-            g_isUpdatePaused = true;
+            // g_isUpdatePaused = true;
         }
     });
 }

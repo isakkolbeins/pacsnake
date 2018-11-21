@@ -75,8 +75,8 @@ Snake.prototype.update = function (du) {
         this.cx += this.velX * du;
         this.cy += this.velY * du;
     } else {
-        this.kill()
-        g_isUpdatePaused = true;
+        this.gameOver();
+        // this.kill()
     }
 
     this.rotation = util.wrapRange(this.rotation,
@@ -132,12 +132,18 @@ Snake.prototype.getRadius = function () {
 Snake.prototype.ghostHit = function () {
 
     // Ath hvort matur eða drepa
-    this.kill();  
+    // this.kill();  
+    this.gameOver();
 };
 
 Snake.prototype.eatFood = function () {
     // add to length and count points 
 };
+
+Snake.prototype.gameOver = function () {
+    g_gameOver = true;
+    // g_isUpdatePaused = true;
+}
 
 Snake.prototype.eatSelf = function(){
     var hitEntitys = spatialManager.findEntityInRange(this.cx,this.cy,10);
@@ -154,9 +160,9 @@ Snake.prototype.eatSelf = function(){
         tailhits.forEach(hitEntity => {
             if(hitEntity.canItKill && g_canDie ){
                 console.log("you die now!!");
+                this.gameOver();
+                // this.kill();
                 
-                this.kill();
-                g_isUpdatePaused = true;
 
             }
         });

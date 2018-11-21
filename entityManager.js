@@ -163,7 +163,10 @@ getSnakePos : function() {
 },
 
 getSnakeIsBlue : function() {
-    return this._snake[0].isBlue;
+    if(this._snake[0]){
+        return this._snake[0].isBlue;
+    }
+    return false;
 },
 
 getSnakeHasLittleTime : function() {

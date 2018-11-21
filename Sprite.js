@@ -19,7 +19,7 @@ function Sprite(speed, images) {
 
     this.width = images[0].width;
     this.height = images[0].height;
-    this.frameCount = images.length;
+    this.frameCount = images.length-1;
     this.scale = 1;
     this.frame = 0;
     this.speed = speed;
@@ -28,21 +28,22 @@ function Sprite(speed, images) {
 
 Sprite.prototype.getFrame = function () {
 
-    if(this.frame >= this.frameCount){
+    if(this.frame > this.frameCount){
         this.frame = 0;
     }
 
     var img = this.images[this.frame];
 
     this.speedCounter += this.speed;
-    
-
     if (this.speedCounter >= 1){
         this.frame += 1;
         this.speedCounter = 0;
     }    
-
     return img;
+}
+
+Sprite.prototype.isLastFrame = function() {
+    return this.frame === this.frameCount;
 }
 
 Sprite.prototype.drawAt = function (ctx, x, y) {
