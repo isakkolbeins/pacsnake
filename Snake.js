@@ -185,7 +185,8 @@ Snake.prototype.eatPowerUp = function () {
 
 Snake.prototype.back2Normal = function () {
     // After x time, the snake turns back yellow and cannot eat the ghosts
-    this.isBlue = false;    
+    this.isBlue = false;
+    this.hasLittleTime = false;    
 };
 
 Snake.prototype.littleTime = function () {
