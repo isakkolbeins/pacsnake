@@ -27,6 +27,7 @@ function Tail(descr) {
     console.log("this can kill you: " + this.canItKill);
     this.decDelay = 1;
     this.num = 50;
+    this.isGhostWall = true;
     // this.cx = this.cx-10;
 
 };

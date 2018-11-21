@@ -92,7 +92,7 @@ wrappedDistSq: function(x1, y1, x2, y2, xWrap, yWrap) {
 },*/
 
 clearCanvas: function (ctx) {
-    ctx.drawImage(g_backgound, 0, 0);
+    ctx.drawImage(g_images.levelBackground, 0, 0);
 },
 
 drawOverlay: function (ctx) {
@@ -100,6 +100,25 @@ drawOverlay: function (ctx) {
     ctx.globalAlpha = 0.5;
     ctx.fillStyle ="black";
     ctx.fillRect(0, 0, 800, 800);
+    ctx.restore();
+},
+
+drawReplay: function (ctx, hover) {
+    ctx.save();
+    // Seta réttan gulann 
+    ctx.fillStyle ="yellow";
+    ctx.fillRect(400-125,650-40,250, 80);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle ="black";
+    ctx.fillRect(400-120,650-35,240, 70);
+    ctx.fillStyle ="yellow";
+    ctx.textAlign="center";
+    ctx.font = "bold 41px Arial";
+    ctx.globalAlpha = 0.5;
+    ctx.fillText("REPLAY", 401, 666);
+    ctx.globalAlpha = 1;
+    ctx.font = "bold 40px Arial";
+    ctx.fillText("REPLAY", 400, 665)
     ctx.restore();
 },
 

@@ -10,12 +10,13 @@
 var gameOver = {
     animationFinished : false,
     startAnimation : false,
+    buttonHover : false,
 
 
     update : function(du) {
         setTimeout(() => {
             this.startAnimation = true;        
-        }, 700);
+        }, 500);
     },
 
     render : function(ctx) {
@@ -26,7 +27,7 @@ var gameOver = {
                 g_sprites.gameOver.drawWrappedCentredAt(ctx, 400, 400, 0);
             } else{
                 g_sprites.gameFinished.drawWrappedCentredAt(ctx, 400, 400, 0);
-                
+                util.drawReplay(ctx);
             }
             if(g_sprites.gameOver.isLastFrame()) this.animationFinished = true;
         } 

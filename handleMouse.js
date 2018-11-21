@@ -18,10 +18,15 @@ function handleMouse(evt) {
     
     g_mouseX = evt.clientX - g_canvas.offsetLeft;
     g_mouseY = evt.clientY - g_canvas.offsetTop;
-    
+  
+
     // If no button is being pressed, then bail
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
+    
+    if(g_gameOver && util.isBetween(g_mouseX, 400-125, 400+125) && util.isBetween(g_mouseY, 650-40, 650+40)){
+        location.reload();
+    } 
     
   
     //entityManager.yoinkNearestShip(g_mouseX, g_mouseY);

@@ -273,17 +273,24 @@ Ghost.prototype.update = function (du) {
     }
     this.wrapPosition();
 
-    var nextX = this.velX * this.speed * du;
-    var nextY = this.velY * this.speed * du;
+    var nextX = this.cx + this.velX * this.speed * du;
+    var nextY = this.cy + this.velY * this.speed * du;
 
-    if (Level.checkCollisionGhost((this.cx + nextX), (this.cy + nextY))
-        || this.hitTail()) {
+    // console.log(this.hitTail());
+
+
+
+    if (Level.checkCollisionGhost((nextX), (nextY)) || this.hitTail()) {
+        // console.log(this.hitTail);
+
         this.changeDirection(rand);
-        
-    } else {
-        this.cx += this.velX * this.speed * du;
-        this.cy += this.velY * this.speed * du;
-    }
+        nextX = this.cx + this.velX * this.speed * du;
+        nextY = this.cy + this.velY * this.speed * du;
+        //console.log(this.hitTail());
+    } 
+
+    this.cx = nextX;
+    this.cy = nextY;
 
     spatialManager.register(this);
 
@@ -293,13 +300,16 @@ Ghost.prototype.hitTail = function () {
 
     var hitEntitys = this.findHitEntity();
     if (hitEntitys.length > 0) {
+        // console.log(hitEntitys);
+        var hit = false;
         hitEntitys.forEach(hitEntity => {
-            if(hitEntity.isTail){
-                return true;
+            if(hitEntity.isGhostWall){
+                hit = true;
             }
         });   
     }
-    return false;
+    // console.log("hit - "+ hit);
+    return hit;
 };
 
 Ghost.prototype.changeDirection = function(rand) {
@@ -308,6 +318,7 @@ Ghost.prototype.changeDirection = function(rand) {
     if (rand < 0.5) {
         random = -1;
     }
+    // console.log("direction changed");
 
     //if the ghosts hit a wall the turn left or right 
     if (this.velX === 1) {

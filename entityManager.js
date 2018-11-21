@@ -237,7 +237,7 @@ update: function(du) {
         while (i < aCategory.length) {
 
             if (aCategory === this._tail){
-                if ((Math.floor((game_score.get_score()+80)/20))>this._snake[0].length) {
+                if ((Math.floor((game_score.get_score()+80)/10))>this._snake[0].length) {
                     console.log("Runnar");
                     this._snake[0].length += 1;
                     var len = this._tail.length;

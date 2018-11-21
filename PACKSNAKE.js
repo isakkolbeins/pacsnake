@@ -16,10 +16,9 @@
 
 /* jshint browser: true, devel: true, globalstrict: true */
 
-var g_canvas = document.getElementById("myCanvas");
-var g_ctx = g_canvas.getContext("2d");
-var g_gameOver = false;
-var g_backgound;
+// var g_canvas = document.getElementById("myCanvas");
+// var g_ctx = g_canvas.getContext("2d");
+// var g_backgound;
 
 /*
 0        1         2         3         4         5         6         7         8
@@ -527,7 +526,6 @@ function preloadDone() {
         g_images.gameOver79,
         g_images.gameOver80,
     ]*/
-    g_backgound = g_images.levelBackground;
 
     entityManager.init();
     createBeginningSnake();
@@ -538,6 +536,8 @@ function preloadDone() {
 
 // Kick it off
 requestPreloads();
+
+
 
 var g_canDie = false;
 
