@@ -144,6 +144,7 @@ function updateSimulation(du) {
     // If the game is over, stop the updates
     if (!g_gameOver) {
         entityManager.update(du);
+        audioManager.update(du);
     } else gameOver.update(du); // If over, start countdown to animation
 
 

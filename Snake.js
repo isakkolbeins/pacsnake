@@ -35,7 +35,7 @@ Snake.prototype.velY = 0;
 Snake.prototype.length = 3;
 Snake.prototype.direction = 'R';
 Snake.prototype.isBlue = false;
-Snake.prototype.hasLittleTime = false; 
+Snake.prototype.hasLittleTime = false;
 Snake.prototype.isHead = true;
 Snake.prototype.scale = 1;
 Snake.prototype.num = 50;
@@ -50,7 +50,7 @@ Snake.prototype.ARROW_UP     = 38;
 Snake.prototype.ARROW_RIGHT  = 39;
 Snake.prototype.ARROW_DOWN   = 40;
 
-var powerUpEaten = false; 
+var powerUpEaten = false;
 
 
 Snake.prototype.update = function (du) {
@@ -67,7 +67,7 @@ Snake.prototype.update = function (du) {
         this.speed += 0.2;
         this.num += 50;
     }
-   
+
     this.calculateDirection();
 
 
@@ -94,7 +94,7 @@ Snake.prototype.update = function (du) {
         setTimeout(this.back2Normal.bind(this), 10000);
         setTimeout(this.littleTime.bind(this), 7000);
     }
-        
+
     spatialManager.register(this);
 };
 
@@ -108,22 +108,22 @@ Snake.prototype.calculateDirection = function () {
     }
     if ((keys[this.KEY_DOWN] || keys[this.ARROW_DOWN]) && this.direction != 'U'){
         this.velX = 0;
-        this.velY = this.speed; 
+        this.velY = this.speed;
         this.direction = 'D';
         this.rotation = Math.PI/2;
-    }  
+    }
     if ((keys[this.KEY_LEFT] || keys[this.ARROW_LEFT]) && this.direction != 'R'){
         this.velX = -1*this.speed;
-        this.velY = 0; 
+        this.velY = 0;
         this.direction = 'L';
         this.rotation = 0;
-    }  
+    }
     if ((keys[this.KEY_RIGHT] || keys[this.ARROW_RIGHT]) && this.direction != 'L'){
         this.velX = this.speed;
-        this.velY = 0; 
+        this.velY = 0;
         this.direction = 'R';
         this.rotation = 0;
-    } 
+    }
 };
 
 Snake.prototype.getRadius = function () {
@@ -133,12 +133,12 @@ Snake.prototype.getRadius = function () {
 Snake.prototype.ghostHit = function () {
 
     // Ath hvort matur eða drepa
-    // this.kill();  
+    // this.kill();
     this.gameOver();
 };
 
 Snake.prototype.eatFood = function () {
-    // add to length and count points 
+    // add to length and count points
 };
 
 Snake.prototype.gameOver = function () {
@@ -164,7 +164,7 @@ Snake.prototype.eatSelf = function(){
                 console.log("you die now!!");
                 this.gameOver();
                 // this.kill();
-                
+
 
             }
         });
@@ -174,7 +174,7 @@ Snake.prototype.eatSelf = function(){
 
 
 Snake.prototype.eatPowerUp = function () {
-    // Set snake, tail and ghosts to blue 
+    // Set snake, tail and ghosts to blue
     // Make ghosts edible
     var hitEntitys = this.findHitEntity();
     if (hitEntitys.length > 0) {
@@ -184,25 +184,26 @@ Snake.prototype.eatPowerUp = function () {
             if(hitEntity.isEdible){
                 this.isBlue = true;
                 powerUpEaten = true;
+                audioManager.playBlueMusic();
                 edible.call(hitEntity);
             }
             else if(hitEntity.canBeEaten){
                 game_score.add_score(1);
                 hitEntity.eat();
             }
-        });   
+        });
     }
 };
 
 Snake.prototype.back2Normal = function () {
     // After x time, the snake turns back yellow and cannot eat the ghosts
     this.isBlue = false;
-    this.hasLittleTime = false;    
+    this.hasLittleTime = false;
 };
 
 Snake.prototype.littleTime = function () {
     // After x time, the snake turns back yellow and cannot eat the ghosts
-    this.hasLittleTime = true;    
+    this.hasLittleTime = true;
 };
 
 Snake.prototype.updateSprite = function () {
@@ -227,10 +228,10 @@ Snake.prototype.updateSprite = function () {
 };
 
 Snake.prototype.render = function (ctx) {
-    
+
     this.sprite.drawWrappedCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
-        
+
     ctx.globalAlpha = 1;
 };

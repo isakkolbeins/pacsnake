@@ -3,11 +3,13 @@
 var audioManager = {
 
     // Audio management
-    audioMain : new Audio(),
-    audioBlue : new Audio(),
-    initialAudio : true,
+    audioMain       : new Audio(),
+    audioBlue       : new Audio(),
+    initialAudio    : true,
     fadeOutInterval : 0,
-    fadeInInterval : 0,
+    fadeInInterval  : 0,
+    KEY_MUTE        : 'M'.charCodeAt(0),
+    musicMuted      : false,
 
     // Initialiser
     init : function() {
@@ -16,21 +18,23 @@ var audioManager = {
         this.audioBlue.src = 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/Blue';
 
         // Event listeners to detect when the music finishes
-        this.audioBlue.addEventListener("ended", function(){
-            this.audioBlue.pause();
-            this.audioBlue.currentTime = 0;
-            this.playMainMusic();
-        });
+        this.audioBlue.addEventListener("ended", this.playMainMusic.bind(this));
 
-        this.audioMain.addEventListener("ended", this.switchToLoopAudio());
+        this.audioMain.addEventListener("ended", this.switchToLoopAudio.bind(this));
 
         this.playMainMusic();
     },
 
-
+    update : function(du) {
+        if (this.muteKeyPressed()) {
+            this.muteMusic();
+        }
+    },
 
     // Plays main music
     playMainMusic : function() {
+        this.audioBlue.pause();
+        this.audioBlue.currentTime = 0;
         this.audioMain.play();
     },
 
@@ -39,10 +43,20 @@ var audioManager = {
         this.audioBlue.play();
 
         // Pauses main music after 0.5 seconds for fade out purposes
-        setTimeout(function() {
-            this.audioMain.pause();
-            this.switchToLoopAudio();
-        }, 500)
+        setTimeout(this.audioMain.pause(), 500);
+        setTimeout(this.switchToLoopAudio.bind(this), 500);
+    },
+
+    // Stops all music
+    stopMusic : function() {
+        this.audioMain.pause();
+        this.audioBlue.pause();
+    },
+
+    // Mutes all music
+    muteMusic : function() {
+        this.audioMain.volume = 0;
+        this.audioBlue.volume = 0;
     },
 
     // Switches main audio to looped version
@@ -80,6 +94,13 @@ var audioManager = {
         if (audio.volume === 0.0) {
             clearInterval(this.fadeOutInterval);
         }
+    },
+
+    muteKeyPressed : function() {
+        if (eatKey(this.KEY_MUTE)) {
+            this.musicMuted = !this.musicMuted;
+        }
+        return this.musicMuted;
     }
 
 }
