@@ -35,6 +35,7 @@ Snake.prototype.velY = 0;
 Snake.prototype.length = 3;
 Snake.prototype.direction = 'R';
 Snake.prototype.isBlue = false;
+Snake.prototype.hasLittleTime = false; 
 Snake.prototype.isHead = true;
 Snake.prototype.scale = 1;
 Snake.prototype.num = 50;
@@ -73,7 +74,10 @@ Snake.prototype.update = function (du) {
     if(!Level.checkCollisionSnake((this.cx + this.velX * du), (this.cy + this.velY * du))){
         this.cx += this.velX * du;
         this.cy += this.velY * du;
-    }    
+    } else {
+        this.kill()
+        g_isUpdatePaused = true;
+    }
 
     this.rotation = util.wrapRange(this.rotation,
                                 0, consts.FULL_CIRCLE);
@@ -87,6 +91,7 @@ Snake.prototype.update = function (du) {
     if(powerUpEaten === true){
         powerUpEaten = false;
         setTimeout(this.back2Normal.bind(this), 10000);
+        setTimeout(this.littleTime.bind(this), 7000);
     }
         
     spatialManager.register(this);
@@ -184,7 +189,12 @@ Snake.prototype.eatPowerUp = function () {
 Snake.prototype.back2Normal = function () {
     // After x time, the snake turns back yellow and cannot eat the ghosts
     this.isBlue = false;
-    
+    this.hasLittleTime = false;    
+};
+
+Snake.prototype.littleTime = function () {
+    // After x time, the snake turns back yellow and cannot eat the ghosts
+    this.hasLittleTime = true;    
 };
 
 Snake.prototype.updateSprite = function () {

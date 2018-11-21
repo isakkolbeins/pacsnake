@@ -14,7 +14,7 @@
 
 // Construct a "sprite" from the given `image`,
 //
-function Sprite(images) {
+function Sprite(speed, images) {
     this.images = images;
 
     this.width = images[0].width;
@@ -22,7 +22,7 @@ function Sprite(images) {
     this.frameCount = images.length;
     this.scale = 1;
     this.frame = 0;
-    this.speed = 0.03;
+    this.speed = speed;
     this.speedCounter = 0; 
 }
 
@@ -36,6 +36,7 @@ Sprite.prototype.getFrame = function () {
 
     this.speedCounter += this.speed;
     
+
     if (this.speedCounter >= 1){
         this.frame += 1;
         this.speedCounter = 0;

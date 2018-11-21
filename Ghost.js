@@ -237,11 +237,16 @@ Ghost.prototype.update = function (du) {
     //The ghosts become blue and edible if the snake is blue
     if (entityManager.getSnakeIsBlue() && !this.hasRespawned) {
         this.isEdible = true;
-        this.sprite = g_sprites.ghostEdible;
+        if(entityManager.getSnakeHasLittleTime()){
+            this.sprite = g_sprites.ghostBlinking;
+        } else {
+            this.sprite = g_sprites.ghostEdible;
+        }
     } else if (!entityManager.getSnakeIsBlue() && !this.hasRespawned) {
         this.isEdible = false;
         this.sprite = this.reset_sprite;
     }
+
 
     //the ghosts follow the snake with a little bit of tactic and 
     //also run away not completly random

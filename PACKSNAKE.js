@@ -241,6 +241,8 @@ function requestPreloads() {
         ghostPink: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostPink.png",
         ghostOrange: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostOrange.png",
         ghostEdible: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostEdible.png",
+        ghostWhite: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostWhite.png",
+        ghostEyes: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_ghostEyes.png",
 
         snakeBoddy: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddy.png",
         snakeBoddyBlue: "https://notendur.hi.is/~iak5/tolvuleikjaforritun/PackSnake/img/sprite_snakeBoddyBlue.png",
@@ -355,34 +357,44 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.ghostBlue = new Sprite([g_images.ghostBlue]);
-    g_sprites.ghostRed = new Sprite([g_images.ghostRed]);
-    g_sprites.ghostOrange = new Sprite([g_images.ghostOrange]);
-    g_sprites.ghostPink = new Sprite([g_images.ghostPink]);
-    g_sprites.ghostEdible = new Sprite([g_images.ghostEdible]);
+    g_sprites.ghostBlue = new Sprite(1, [g_images.ghostBlue]);
+    g_sprites.ghostRed = new Sprite(1, [g_images.ghostRed]);
+    g_sprites.ghostOrange = new Sprite(1, [g_images.ghostOrange]);
+    g_sprites.ghostPink = new Sprite(1, [g_images.ghostPink]);
+    g_sprites.ghostEdible = new Sprite(1, [g_images.ghostEdible]);
 
-    g_sprites.snakeBoddy = new Sprite([g_images.snakeBoddy]);
-    g_sprites.snakeBoddyBlue = new Sprite([g_images.snakeBoddyBlue]);
+    g_sprites.snakeBoddy = new Sprite(1, [g_images.snakeBoddy]);
+    g_sprites.snakeBoddyBlue = new Sprite(1, [g_images.snakeBoddyBlue]);
 
-    g_sprites.snakeHeadL = new Sprite([g_images.snakeHead0L,
+    var snakeUpdateSpeed = 0.03;
+
+    g_sprites.snakeHeadL = new Sprite(snakeUpdateSpeed, 
+    [g_images.snakeHead0L,
     g_images.snakeHead1L,
     g_images.snakeHead2L,
     g_images.snakeHead3L]);
 
-    g_sprites.snakeHeadR = new Sprite([g_images.snakeHead0R,
+    g_sprites.snakeHeadR = new Sprite(snakeUpdateSpeed, 
+    [g_images.snakeHead0R,
     g_images.snakeHead1R,
     g_images.snakeHead2R,
     g_images.snakeHead3R]);
 
-    g_sprites.snakeHeadBlueL = new Sprite([g_images.snakeHeadBlue0L,
+    g_sprites.snakeHeadBlueL = new Sprite(snakeUpdateSpeed, 
+    [g_images.snakeHeadBlue0L,
     g_images.snakeHeadBlue1L,
     g_images.snakeHeadBlue2L,
     g_images.snakeHeadBlue3L]);
 
-    g_sprites.snakeHeadBlueR = new Sprite([g_images.snakeHeadBlue0R,
+    g_sprites.snakeHeadBlueR = new Sprite(snakeUpdateSpeed,
+    [g_images.snakeHeadBlue0R,
     g_images.snakeHeadBlue1R,
     g_images.snakeHeadBlue2R,
     g_images.snakeHeadBlue3R]);
+
+    g_sprites.ghostBlinking = new Sprite(0.005, 
+    [g_images.ghostEdible,
+    g_images.ghostWhite]);
 
     entityManager.init();
     createBeginningSnake();
