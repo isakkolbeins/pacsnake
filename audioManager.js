@@ -1,8 +1,12 @@
+// ======
+// AUDIO
+// ======
+
 "use strict";
 
 var audioManager = {
 
-    // Audio management
+    // Audio management variables
     audioMain       : new Audio(),
     audioBlue       : new Audio(),
     audioGameOver   : new Audio(),

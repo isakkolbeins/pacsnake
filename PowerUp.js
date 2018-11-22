@@ -4,8 +4,6 @@
 
 "use strict";
 
-/* jshint browser: true, devel: true, globalstrict: true */
-
 /*
 0        1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
@@ -19,7 +17,7 @@ function PowerUp(descr) {
 
     this.randomisePosition();
     this.randomiseVelocity();
-      
+
     // Default sprite and scale, if not otherwise specified
     this.sprite = g_sprites.snakeBoddyBlue;
     this.scale  = 0.7;
@@ -29,7 +27,7 @@ function PowerUp(descr) {
 PowerUp.prototype = new Entity();
 
 PowerUp.prototype.randomisePosition = function () {
-    // Rock randomisation defaults (if nothing otherwise specified)
+    // PowerUp randomisation defaults (if nothing otherwise specified)
     this.cx = this.cx || Math.random() * g_canvas.width;
     this.cy = this.cy || Math.random() * g_canvas.height;
     this.rotation = this.rotation || 0;
@@ -55,11 +53,11 @@ PowerUp.prototype.randomiseVelocity = function () {
 PowerUp.prototype.update = function (du) {
 
     spatialManager.unregister(this);
-    
+
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
-    
+
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
@@ -68,7 +66,7 @@ PowerUp.prototype.update = function (du) {
                                     0, consts.FULL_CIRCLE);
 
     this.wrapPosition();
-    
+
     spatialManager.register(this);
 
 };
@@ -81,14 +79,12 @@ PowerUp.prototype.getRadius = function () {
 PowerUp.prototype.eat = function () {
     this.kill();
     setTimeout(function(){
-       entityManager.generatePowerUp(); 
-    },20000); 
+       entityManager.generatePowerUp();
+    },20000);
 };
 
 
 PowerUp.prototype.render = function (ctx) {
-    // var origScale = this.sprite.scale;
-    // pass my scale into the sprite, for drawing
     this.sprite.scale = this.scale;
     this.sprite.alpha = 0.7;
     this.sprite.drawWrappedCentredAt(

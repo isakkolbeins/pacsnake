@@ -1,5 +1,5 @@
 // =========
-// PACKSNAKE
+// PACSNAKE
 // =========
 /*
 
@@ -13,12 +13,6 @@
 */
 
 "use strict";
-
-/* jshint browser: true, devel: true, globalstrict: true */
-
-// var g_canvas = document.getElementById("myCanvas");
-// var g_ctx = g_canvas.getContext("2d");
-// var g_backgound;
 
 /*
 0        1         2         3         4         5         6         7         8
@@ -147,7 +141,6 @@ function updateSimulation(du) {
         audioManager.update(du);
     } else gameOver.update(du); // If over, start countdown to animation
 
-
 }
 
 // GAME-SPECIFIC DIAGNOSTICS
@@ -157,43 +150,9 @@ var KEY_SPATIAL = keyCode('X');
 var g_isPaused = false;
 var KEY_PAUSE = keyCode('P');;
 
-/*
-var g_useGravity = false;
-var g_useAveVel = true;
-
-var KEY_GRAVITY = keyCode('G');
-var KEY_AVE_VEL = keyCode('V');
-
-var KEY_HALT  = keyCode('H');
-var KEY_RESET = keyCode('R');
-
-var KEY_0 = keyCode('0');
-var KEY_1 = keyCode('1');
-var KEY_2 = keyCode('2');
-
-
-var KEY_K = keyCode('K'); */
-
 function processDiagnostics() {
-
     if (eatKey(KEY_PAUSE)) g_isPaused = !g_isPaused;
     if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
-    /*
-        if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
-        if (eatKey(KEY_HALT)) entityManager.haltShips();
-        if (eatKey(KEY_RESET)) entityManager.resetShips();
-        if (eatKey(KEY_0)) entityManager.toggleRocks();
-        if (eatKey(KEY_1)) entityManager.generateShip({
-            cx : g_mouseX,
-            cy : g_mouseY,
-            sprite : g_sprites.ship});
-        if (eatKey(KEY_2)) entityManager.generateShip({
-            cx : g_mouseX,
-            cy : g_mouseY,
-            sprite : g_sprites.ship2
-            });
-        if (eatKey(KEY_K)) entityManager.killNearestShip(
-            g_mouseX, g_mouseY); */
 }
 
 
@@ -207,14 +166,6 @@ function processDiagnostics() {
 // the diagnostic toggles (including screen-clearing).
 //
 // It then delegates the game-specific logic to `gameRender`
-
-
-// GAME-SPECIFIC RENDERING
-/*var animationFinished = false;
-var startAnimation = false;
-function triggerGameOver() {
-    startAnimation = true;
-}*/
 
 function renderSimulation(ctx) {
     // Render all the entities in enitiyManager
@@ -287,7 +238,6 @@ function getGameOver(json) {
     for(var i = 0; i < 80; i++){
         var num = i;
         if (i<10) num = "0"+i;
-        // console.log("gameOver"+num + " = https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver"+ num +".png")
         json["gameOver"+num] = "https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/GameOver/sprite_gameOver"+ num +".png" ;
     }
 }
@@ -352,17 +302,9 @@ function preloadDone() {
 
     g_sprites.gameFinished = new Sprite(1, [g_images.gameFinished]);
 
-
-
-    //g_sprites.gameOver = new Sprite(0.005, g_images.gameOver);
     var gameOverImgs = getGameOverImgs();
 
-
     g_sprites.gameOver = new Sprite(0.04, gameOverImgs);
-/*
-    gameOverImgs.forEach(img => {
-        console.log(img.name);
-    });*/
 
     entityManager.init();
     audioManager.init();
@@ -374,8 +316,6 @@ function preloadDone() {
 
 // Kick it off
 requestPreloads();
-
-
 
 var g_canDie = false;
 

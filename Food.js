@@ -1,18 +1,22 @@
+// ======
+// FOOD
+// ======
+
 "use strict";
 
 function Food(descr){
     this.setup(descr);
-    
+
     this.sprite = g_sprites.snakeBoddy;
     this.rememberResets();
 
-    
+
     this.scale = 0.4;
     this._isWarping = false;
 
     this.canBeEaten = true;
     this.eaten = false;
- 
+
 };
 
 
@@ -25,12 +29,12 @@ Food.prototype.rememberResets = function () {
     this.reset_cx = this.cx;
     this.reset_cy = this.cy;
     this.reset_sprite = this.sprite;
-   
+
 };
 
 Food.prototype.reset = function(){
     this.setPos(this.reset_cx, this.reset_cy);
-   
+
     this.sprite = this.reset_sprite;
 }
 
@@ -56,13 +60,7 @@ Food.prototype.update = function(){
 };
 
 Food.prototype.render = function(ctx){
-
-  /*  ctx.save();
-    ctx.fillStyle = "yellow";
-    util.fillCircle(ctx,this.cx,this.cy,radius);
-    ctx.restore();
-    */
-   this.sprite.scale = this.scale;
+    this.sprite.scale = this.scale;
     this.sprite.alpha = 0.7;
     this.sprite.drawWrappedCentredAt(
         ctx, this.cx, this.cy, this.rotation
@@ -71,5 +69,5 @@ Food.prototype.render = function(ctx){
 
 Food.prototype.respawn_food = function(){
         this.resurrect();
-        entityManager.generateFood(this); 
+        entityManager.generateFood(this);
 }

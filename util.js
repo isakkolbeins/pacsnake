@@ -77,20 +77,6 @@ wrappedDistSq: function(x1, y1, x2, y2, xWrap, yWrap) {
 // CANVAS OPS
 // ==========
 
-/*updateBackground: function() {
-
-    var img = new Image;
-    img.crossOrigin = "anonymous";
-    img.src = g_canvas.toDataURL();
-    
-    g_backgound = img;
-    // g_backgound = ctx.getImageData(0, 0, 800, 800);
-    // g_backgound.src = url + '?' + new Date().getTime();
-    // g_backgound.setAttribute('crossOrigin', '');
-    // g_backgound.crossOrigin = "Anonymous";
-
-},*/
-
 clearCanvas: function (ctx) {
     ctx.drawImage(g_images.levelBackground, 0, 0);
 },
@@ -105,7 +91,7 @@ drawOverlay: function (ctx) {
 
 drawReplay: function (ctx, hover) {
     ctx.save();
-    // Seta réttan gulann 
+    // Seta réttan gulann
     ctx.fillStyle ="yellow";
     ctx.fillRect(400-125,650-40,250, 80);
     ctx.globalAlpha = 1;

@@ -4,8 +4,6 @@
 
 "use strict";
 
-/* jshint browser: true, devel: true, globalstrict: true */
-
 /*
 0        1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
@@ -76,8 +74,6 @@ Snake.prototype.update = function (du) {
         this.cy += this.velY * du;
     } else {
         this.gameOver();
-
-        // this.kill()
     }
 
     this.rotation = util.wrapRange(this.rotation,
@@ -131,20 +127,12 @@ Snake.prototype.getRadius = function () {
 };
 
 Snake.prototype.ghostHit = function () {
-
-    // Ath hvort matur eða drepa
-    // this.kill();
     this.gameOver();
-};
-
-Snake.prototype.eatFood = function () {
-    // add to length and count points
 };
 
 Snake.prototype.gameOver = function () {
     g_gameOver = true;
     this.updateSprite();
-    // g_isUpdatePaused = true;
 }
 
 Snake.prototype.eatSelf = function(){
@@ -163,9 +151,6 @@ Snake.prototype.eatSelf = function(){
             if(hitEntity.canItKill && g_canDie ){
                 console.log("you die now!!");
                 this.gameOver();
-                // this.kill();
-
-
             }
         });
 
