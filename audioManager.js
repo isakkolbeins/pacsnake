@@ -7,6 +7,7 @@ var audioManager = {
     audioBlue       : new Audio(),
     audioGameOver   : new Audio(),
     initialAudio    : true,
+    mainIsPlaying   : false,
     loopSource      : 'https://notendur.hi.is/boo11/Tolvuleikjaforritun/pac-snake/Music/loopGB',
     fadeOutInterval : 0,
     fadeInInterval  : 0,
@@ -34,6 +35,9 @@ var audioManager = {
         if (this.muteKeyPressed()) {
             this.muteMusic();
         }
+        else {
+            this.unMuteMusic();
+        }
     },
 
     // Plays main music
@@ -41,15 +45,18 @@ var audioManager = {
         this.audioBlue.pause();
         this.audioBlue.currentTime = 0;
         this.audioMain.play();
+        this.mainIsPlaying = true;
     },
 
     // Plays blue musics
     playBlueMusic : function() {
+        this.mainIsPlaying = false;
         this.audioBlue.play();
 
         // Pauses main music after 0.5 seconds for fade out purposes
         setTimeout(this.audioMain.pause(), 500);
         setTimeout(this.switchToLoopAudio.bind(this), 500);
+        this.fade(this.audioMain, this.audioBlue);
     },
 
     // Plays game over music
@@ -69,6 +76,18 @@ var audioManager = {
     muteMusic : function() {
         this.audioMain.volume = 0;
         this.audioBlue.volume = 0;
+        this.audioGameOver.volume = 0;
+    },
+
+    // Unmutes all music
+    unMuteMusic : function() {
+        if (this.mainIsPlaying) {
+            this.audioMain.volume = 1;
+        }
+        else {
+            this.audioBlue.volume = 1;
+        }
+        this.audioGameOver.volume = 1;
     },
 
     // Switches main audio to looped version
@@ -83,9 +102,9 @@ var audioManager = {
 
     // Fades out audio A and fades in audio B
     fade : function(audioFadeOut, audioFadeIn) {
-        this.audioFadeIn.volume = 0;
-        this.fadeInInterval = setInterval(this.fadeIn(this.audioFadeIn), 50);
-        this.fadeOutInterval = setInterval(this.fadeOut(this.audioFadeOut), 50);
+        audioFadeIn.volume = 0;
+        this.fadeInInterval = setInterval(this.fadeIn(audioFadeIn), 50);
+        this.fadeOutInterval = setInterval(this.fadeOut(audioFadeOut), 50);
     },
 
     // Fades in audio
