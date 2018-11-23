@@ -57,6 +57,7 @@ Entity.prototype.kill = function () {
     this._isDeadNow = true;
 };
 
+// Added function to resurrect "dead" entities
 Entity.prototype.resurrect = function(){
     this._isDeadNow = false;
 }

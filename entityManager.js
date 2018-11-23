@@ -10,24 +10,51 @@ var entityManager = {
 // "PRIVATE" DATA
 
 _ghosts  : [],
-_bullets : [],
 _tail    : [],
 _snake   : [],
 _powerup : [],
 _food : [],
-_bShowRocks : true,
-
-
 
 // "PRIVATE" METHODS
 
+// Generates 4 ghosts each with diffrent color id
 _generateGhosts : function() {
-    var i,
-        ghostCount = 4;
-
+    var i, ghostCount = 4;
     for (i = 0; i < ghostCount; ++i) {
         this.generateGhost({color:i});
+    }
+},
 
+_generateFood : function() {
+    var x = 60;
+    var y = 60;
+
+    for (var i = 0; i < 18; i++) {
+        for (var j = 0; j < 18; j++) {
+
+            if ((i < 2) || (i > 15)) {
+                this.createFood(new Food({ cx: x, cy: y }));
+            }
+            else if ((j < 2) || (j > 15)) {
+                this.createFood(new Food({ cx: x, cy: y }));
+            }
+            else if (((i === 5) || (i === 6)) && ((j > 3) && (j < 14))) {
+                this.createFood(new Food({ cx: x, cy: y }));
+            }
+            else if (((i === 11) || (i === 12)) && ((j > 3) && (j < 14))) {
+                this.createFood(new Food({ cx: x, cy: y }));
+            }
+            else if (((j === 4) || (j === 5)) && ((i >= 5) && (i <= 12))) {
+                this.createFood(new Food({ cx: x, cy: y }));
+            }
+            else if (((j === 12) || (j === 13)) && ((i >= 5) && (i <= 12))) {
+                this.createFood(new Food({ cx: x, cy: y }));
+            }
+
+            x += 40;
+        }
+        x = 60;
+        y += 40;
     }
 },
 
@@ -53,6 +80,7 @@ deferredSetup : function () {
 
 init: function() {
     this._generateGhosts();
+    this._generateFood();
     this.generatePowerUp();
 },
 
@@ -68,13 +96,11 @@ generateSnake : function(descr) {
 generateTail : function(follow) {
     var delay = 0;
     var delayMax = this._tail.length;
-
     var itCanKill = true;
 
     if(this._tail.length <5){
         itCanKill = false;
     }
-
     var descr = {
         follow : follow,
         cx : follow.cx,
@@ -91,17 +117,25 @@ generateGhost : function(descr) {
     this._ghosts.push(new Ghost(descr));
 },
 
+// Resurrects a killed ghost 
 resurrectGhost : function(ghost) {
     this._ghosts.push(ghost);
 },
 
-generatePowerUp : function(descr) {
-    this._powerup.push(new PowerUp(descr));
+// Resets ghost respawn atribute, so they can go edible again
+resetGhostRespawn : function() {
     for (var i = 0; i < this._ghosts.length; i++) {
         this._ghosts[i].hasRespawned = false;
     }
 },
 
+// Generates a new powerup & resets ghost respawn
+generatePowerUp : function(descr) {
+    this._powerup.push(new PowerUp(descr));
+    this.resetGhostRespawn();
+},
+
+// Returns the (x,y) position of the snake
 getSnakePos : function() {
     var pos = {
         cx : this._snake[0].cx,
@@ -110,6 +144,7 @@ getSnakePos : function() {
     return pos;
 },
 
+// Returns whether or not the snake is Blue(powerup is active)
 getSnakeIsBlue : function() {
     if(this._snake[0]){
         return this._snake[0].isBlue;
@@ -117,11 +152,13 @@ getSnakeIsBlue : function() {
     return false;
 },
 
+// Returns whether or not a short time of active powerup remains
 getSnakeHasLittleTime : function() {
     return this._snake[0].hasLittleTime;
 },
 
-generateFood : function(food){
+// Generates the food 
+createFood : function(food){
     this._food.push(food);
 },
 
@@ -132,11 +169,10 @@ update: function(du) {
         var aCategory = this._categories[c];
         var i = 0;
 
-
         while (i < aCategory.length) {
-
-            if (aCategory === this._tail){
-                if ((Math.floor((game_score.get_score()+80)/10))>this._snake[0].length) {
+            if (aCategory === this._tail){ // For each tail part on the snake
+                // For each 10 points the snake grows by one tail
+                if ((Math.floor((game_score.get_score()+80)/10))>this._snake[0].length) { 
                     this._snake[0].length += 1;
                     var len = this._tail.length;
                     this.generateTail(aCategory[len-1]);
@@ -147,16 +183,14 @@ update: function(du) {
             var status = aCategory[i].update(du);
 
             if (status === this.KILL_ME_NOW) {
-                if(aCategory === this._ghosts){
+                if(aCategory === this._ghosts){ // if the entetie killed is a ghost 
                     var deadGhost = aCategory[i];
-                    setTimeout(deadGhost.respawn.bind(deadGhost), 3000);
-                    aCategory.splice(i,1);
-                } else {
-                    aCategory.splice(i,1);
-                }
-
+                    setTimeout(deadGhost.respawn.bind(deadGhost), 3000); // Respawn it after 3sec
+                } 
+                
                 // remove the dead guy, and shuffle the others down to
                 // prevent a confusing gap from appearing in the array
+                aCategory.splice(i,1);
             }
             else {
                 ++i;
@@ -174,9 +208,9 @@ render: function(ctx) {
 
         var aCategory = this._categories[c];
 
-        // Ef tail byrja aftast að rendera looks better
+        // Render tail from last to first, looks better
         if (aCategory === this._tail){
-            for (var i = aCategory.length-1; i >=0 ; --i) {
+            for (var i = aCategory.length-1; i >=0; --i) {
                 aCategory[i].render(ctx);
             }
         } else{
@@ -186,6 +220,7 @@ render: function(ctx) {
         }
     }
 
+    // Render the gamescore
     game_score.show_score(ctx);
 
     if(g_isUpdatePaused){

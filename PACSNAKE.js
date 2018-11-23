@@ -38,7 +38,7 @@ function createBeginningSnake() {
 //========================
 // CREATE FOOD
 //=========================
-
+/*
 function createFood() {
 
     var x = 60;
@@ -74,7 +74,7 @@ function createFood() {
     }
 
 
-}
+}*/
 
 
 //=========================
@@ -309,7 +309,7 @@ function preloadDone() {
     entityManager.init();
     audioManager.init();
     createBeginningSnake();
-    createFood();
+    // createFood();
 
     main.init();
 }

@@ -10,13 +10,11 @@ function Food(descr){
     this.sprite = g_sprites.snakeBoddy;
     this.rememberResets();
 
-
     this.scale = 0.4;
     this._isWarping = false;
 
     this.canBeEaten = true;
     this.eaten = false;
-
 };
 
 
@@ -69,5 +67,5 @@ Food.prototype.render = function(ctx){
 
 Food.prototype.respawn_food = function(){
         this.resurrect();
-        entityManager.generateFood(this);
+        entityManager.createFood(this);
 }
