@@ -17,14 +17,13 @@ function Ghost(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
-
-    //speed ratio
-    this.speed = 1;
-
-    //number
-    this.num = 50;
-
+    this.speed = 1; //speed ratio
+    this.num = 50;  //speed update interval
     this.randomisePosition();
+    
+    this.scale = 1;
+    this.isEdible = false;
+    this.hasRespawned = false;
 
     if (!this.color) {
         this.color = 0;
@@ -49,15 +48,7 @@ function Ghost(descr) {
             this.sprite = this.sprite.ghostBlue;
             break;
     }
-
-    // Set normal drawing scale, and warp state off
-    this.scale = 1;
-    // this._isWarping = false;
-    this.isEdible = false;
-    this.hasRespawned = false;
-
     this.rememberResets();
-
 };
 
 Ghost.prototype = new Entity();
@@ -67,7 +58,6 @@ Ghost.prototype.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
 //generate a random starting position and direction within the starting box 
 //for the ghosts when they spawn in the beginning of the game
 Ghost.prototype.randomisePosition = function () {
-    // Rock randomisation defaults (if nothing otherwise specified)
     this.cx = this.cx || 360 + Math.random() * 80;
     this.cy = this.cy || 370 + Math.random() * 60;
     var ran = Math.floor(Math.random() * 4);
@@ -182,9 +172,8 @@ Ghost.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
-    var stig = game_score.get_score();
-
-    if(stig > this.num){
+    // Every 50 score interval, the ghost speed up
+    if(game_score.get_score() > this.num){
         this.speed += 0.2;
         this.num += 50;
     }
@@ -194,10 +183,6 @@ Ghost.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
-    var rand = Math.random();
-
-    this.delay -= du;
-
     //The ghosts become blue and edible if the snake is blue
     if (entityManager.getSnakeIsBlue() && !this.hasRespawned) {
         this.isEdible = true;
@@ -206,25 +191,26 @@ Ghost.prototype.update = function (du) {
         } else {
             this.sprite = g_sprites.ghostEdible;
         }
-    } else if (!entityManager.getSnakeIsBlue() && !this.hasRespawned) {
+    } //If it has respawned while the powerup is active, it becomes inedible again
+    else if (!entityManager.getSnakeIsBlue() && !this.hasRespawned) {
         this.isEdible = false;
         this.sprite = this.reset_sprite;
     }
-
-
-    //the ghosts follow the snake with a little bit of tactic and 
+    
+    var rand = Math.random();
+    this.delay -= du;
+    //The ghosts follow the snake with a little bit of tactic and 
     //also run away not completly random
+    //Delay used to limit the responstime of ghosts 
     this.getSnake();
     if (this.delay < 0) {
         if (this.isEdible) {
-            /// ATH ---- skoða eh skrítið
-            //this.getWorstMove();
             if (rand > 0.2) {
                 this.getWorstMove();
             } else {
                 this.getRandomMove();
             }
-            this.delay = 1000 / NOMINAL_UPDATE_INTERVAL;
+            this.delay = 1000 / NOMINAL_UPDATE_INTERVAL; 
         } else {
             if (rand > 0.2) {
                 this.getBestMove();
@@ -239,39 +225,28 @@ Ghost.prototype.update = function (du) {
     var nextX = this.cx + this.velX * this.speed * du;
     var nextY = this.cy + this.velY * this.speed * du;
 
-    // console.log(this.hitTail());
-
-
-
+    // If ghost collides with wall or tail, change direction
     if (Level.checkCollisionGhost((nextX), (nextY)) || this.hitTail()) {
-        // console.log(this.hitTail);
-
         this.changeDirection(rand);
         nextX = this.cx + this.velX * this.speed * du;
         nextY = this.cy + this.velY * this.speed * du;
-        //console.log(this.hitTail());
     } 
 
     this.cx = nextX;
     this.cy = nextY;
 
     spatialManager.register(this);
-
 };
 
+// Checks if the ghost hit a tail
 Ghost.prototype.hitTail = function () {
-
     var hitEntitys = this.findHitEntity();
     if (hitEntitys.length > 0) {
-        // console.log(hitEntitys);
         var hit = false;
         hitEntitys.forEach(hitEntity => {
-            if(hitEntity.isGhostWall){
-                hit = true;
-            }
+            if(hitEntity.isGhostWall) hit = true;
         });   
     }
-    // console.log("hit - "+ hit);
     return hit;
 };
 
@@ -281,8 +256,6 @@ Ghost.prototype.changeDirection = function(rand) {
     if (rand < 0.5) {
         random = -1;
     }
-    // console.log("direction changed");
-
     //if the ghosts hit a wall the turn left or right 
     if (this.velX === 1) {
         this.velX = 0;
@@ -299,7 +272,6 @@ Ghost.prototype.changeDirection = function(rand) {
     }
 };
 
-
 Ghost.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2);
 };
@@ -309,8 +281,6 @@ Ghost.prototype.eat = function () {
     game_score.add_score(20);
     this.kill();
 };
-
-
 
 //resetting the ghost 
 Ghost.prototype.reset = function () {

@@ -22,12 +22,10 @@ function handleMouse(evt) {
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
 
+    // If the game is over, and the replay button area i clicked, soft relad page
     if(g_gameOver && util.isBetween(g_mouseX, 400-125, 400+125) && util.isBetween(g_mouseY, 650-40, 650+40)){
         location.reload(false);
     }
-
-
-    //entityManager.yoinkNearestShip(g_mouseX, g_mouseY);
 }
 
 // Handle "down" and "move" events the same way.

@@ -2,26 +2,16 @@
 // GameOver
 // =========
 
-
 "use strict";
-
-/* jshint browser: true, devel: true, globalstrict: true */
 
 var gameOver = {
     animationFinished : false,
     startAnimation : false,
     buttonHover : false,
 
-
     update : function(du) {
-        /*if(!this.startAnimation){
-        g_sprites.gameOver.setToFirstFrame();
-    }*/
-    this.startAnimation = true;
-    /*setTimeout(() => {
-
-}, 1000);*/
-    audioManager.playGameOverMusic();
+        this.startAnimation = true;
+        audioManager.playGameOverMusic();
     },
 
     render : function(ctx) {
@@ -36,10 +26,5 @@ var gameOver = {
             }
             if(g_sprites.gameOver.isLastFrame()) this.animationFinished = true;
         }
-
     }
-
-
-
-
 }
